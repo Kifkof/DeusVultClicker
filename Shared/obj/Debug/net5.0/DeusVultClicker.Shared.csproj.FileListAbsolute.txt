@@ -1,0 +1,12 @@
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\bin\Debug\net5.0\DeusVultClicker.Shared.deps.json
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\bin\Debug\net5.0\DeusVultClicker.Shared.dll
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\bin\Debug\net5.0\ref\DeusVultClicker.Shared.dll
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\bin\Debug\net5.0\DeusVultClicker.Shared.pdb
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\DeusVultClicker.Shared.csprojAssemblyReference.cache
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\DeusVultClicker.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\DeusVultClicker.Shared.AssemblyInfoInputs.cache
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\DeusVultClicker.Shared.AssemblyInfo.cs
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\DeusVultClicker.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\DeusVultClicker.Shared.dll
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\ref\DeusVultClicker.Shared.dll
+C:\Users\Kifkof\source\repos\DeusVultClicker\Shared\obj\Debug\net5.0\DeusVultClicker.Shared.pdb
