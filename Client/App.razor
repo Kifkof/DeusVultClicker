@@ -1,10 +1,11 @@
 @using System.Timers
 @using DeusVultClicker.Client.Advancements
 @using DeusVultClicker.Client.Advancements.Effects
-<header>Header</header>
+<header><h1>Deus Vult Clicker</h1></header>
 <main>
     <div id="current-faith">Faith:  @currentFaith.ToString("n2") </div>
-    <div id="current-followers">Followers:  @currentFollowers</div>
+    <div id="current-followers">Followers:  @currentFollowers / @Reach</div>
+    <div id="available-space">Available space:  @AvailableSpace</div>
     <div id="current-money">Cash:  @currentMoney.ToString("c")</div>
     <div id="secondary-click-container">
         <button class="btn btn-primary" @onclick="IncrementFaith">Pray</button>
@@ -13,6 +14,7 @@
         <button class="btn btn-primary" @onclick="IncrementFollowers">Proselytize</button>
     </div>
     <div id="era-container">
+        <h3>Era advancements</h3>
         @if (AvailableEraAdvancement != null)
         {
             <span class="era-title">@AvailableEraAdvancement.Title</span>
@@ -22,8 +24,28 @@
             <span class="era-faith-cost">@AvailableEraAdvancement.Cost Faith</span>
             <button class="btn btn-primary" type="button" disabled="@(AvailableEraAdvancement.Cost > currentFaith)" @onclick="() => AdvanceToEra(AvailableEraAdvancement)">Buy</button>
         }
+        else
+        {
+            <span>No era advancment available.</span>
+        }
     </div>
-    <div id="building-container">
+    <div id="owned-buildings-container">
+        <h3>Owned buildings</h3>
+        <ul>
+            @foreach (var building in OwnedBuildings)
+            {
+                <li>
+                    <span class="building-title">@building.Title</span>
+                    <span class="building-description">@building.Description</span>
+                    <span class="building-effect-description">@building.EffectDescription @building.Reach</span>
+                    <span class="building-flavor-text">@building.FlavorText</span>
+                    <button class="btn btn-warning" type="button" @onclick="() => DemolishBuilding(building)">Demolish</button>
+                </li>
+            }
+        </ul>
+    </div>
+    <div id="available-buildings-container">
+        <h3>Available buildings</h3>
         <ul>
             @foreach (var building in AvailableBuildings)
             {
@@ -39,6 +61,7 @@
         </ul>
     </div>
     <div id="upgrades-container">
+        <h3>Faith upgrades</h3>
         <ul>
             @foreach (var upgrade in AvailableUpgrades)
             {
@@ -59,7 +82,7 @@
     main {
         flex: 1;
         display: grid;
-        grid-template: "cft cfl cm uc" 5% "scc pcc bc uc" auto "ec ec bc uc" auto / 12.5% 12.5% auto auto
+        grid-template: "cft cfl as cm cm" 5% "scc pcc obc abc uc" auto "ec ec obc abc uc" auto / 10% 10% 1fr 1fr 1fr
     }
 
     #current-faith {
@@ -73,6 +96,9 @@
     #current-money {
         grid-area: cm;
     }
+    #available-space {
+        grid-area: as;
+    }
 
     #secondary-click-container {
         grid-area: scc;
@@ -85,20 +111,22 @@
     #era-container {
         grid-area: ec;
     }
-
-    #building-container {
-        grid-area: bc;
+    #owned-buildings-container {
+        grid-area: obc;
+    }
+    #available-buildings-container {
+        grid-area: abc;
     }
 
     #upgrades-container {
         grid-area: uc;
     }
 
-        #upgrades-container ul, #building-container ul {
+        #upgrades-container ul, #available-building-container ul, #owned-buildings-container u {
             list-style-type: none;
         }
 
-            #upgrades-container ul li, #building-container ul li, #era-container {
+            #upgrades-container ul li, #available-buildings-container ul li, #owned-buildings-container ul li, #era-container {
                 display: flex;
                 flex-direction: column;
             }
