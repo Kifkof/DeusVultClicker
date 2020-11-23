@@ -1,0 +1,37 @@
+﻿<span class="title">@Title</span>
+<span class="description">@Description</span>
+<span class="effect-description">@EffectDescription</span>
+<span class="flavor-text">@FlavorText</span>
+<span class="cost">@Cost</span>
+<button class="btn btn-primary" type="button" disabled="@Disabled" @onclick="@OnBuy">@BuyText</button>
+<style>
+    .title{
+        font-size: larger;
+        padding-bottom: .5em;
+    }
+    .flavor-text{
+        font-size: smaller;
+        color: gray;
+    }
+    .cost{
+        padding-top: .5em;
+    }
+</style>
+@code {
+    [Parameter]
+    public string Title { get; set; }
+    [Parameter]
+    public string Description { get; set; }
+    [Parameter]
+    public string EffectDescription { get; set; }
+    [Parameter]
+    public string FlavorText { get; set; }
+    [Parameter]
+    public string Cost { get; set; }
+    [Parameter]
+    public string BuyText { get; set; } = "Buy";
+    [Parameter]
+    public bool Disabled { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnBuy { get; set; }
+}

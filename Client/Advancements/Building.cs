@@ -2,7 +2,7 @@
 {
    public class Building : Advancement
    {
-      public new string EffectDescription { get; } = "Reach:";
+      public new string EffectDescription => $"Reach: {Reach}, Space: {SpaceRequirement}";
       public int SpaceRequirement { get; init; }
       public int Reach { get; init; }
    }
