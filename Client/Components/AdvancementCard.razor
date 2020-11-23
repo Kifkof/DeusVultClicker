@@ -4,19 +4,7 @@
 <span class="flavor-text">@FlavorText</span>
 <span class="cost">@Cost</span>
 <button class="btn btn-primary" type="button" disabled="@Disabled" @onclick="@OnBuy">@BuyText</button>
-<style>
-    .title{
-        font-size: larger;
-        padding-bottom: .5em;
-    }
-    .flavor-text{
-        font-size: smaller;
-        color: gray;
-    }
-    .cost{
-        padding-top: .5em;
-    }
-</style>
+
 @code {
     [Parameter]
     public string Title { get; set; }
