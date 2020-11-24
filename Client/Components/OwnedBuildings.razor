@@ -1,0 +1,16 @@
+﻿<h3>Owned buildings</h3>
+<ul>
+    @foreach (var building in BuildingService.OwnedBuildings)
+    {
+        <li>
+            <span class="building-title">@building.Title</span>
+            <span class="building-effect-description">@building.EffectDescription</span>
+            <button class="btn btn-warning" type="button" @onclick="() => BuildingService.DemolishBuilding(building)">Demolish</button>
+        </li>
+    }
+</ul>
+
+@code {
+    [Inject]
+    private BuildingService BuildingService { get; set; }
+}

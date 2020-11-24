@@ -1,0 +1,22 @@
+﻿<h3>Faith upgrades</h3>
+<ul>
+    @foreach (var upgrade in UpgradeService.AvailableUpgrades)
+    {
+        <li>
+            <AdvancementCard Title="@upgrade.Title"
+                             Description="@upgrade.Description"
+                             EffectDescription="@upgrade.EffectDescription"
+                             FlavorText="@upgrade.FlavorText"
+                             Cost="@($"{upgrade.Cost} Faith")"
+                             Disabled="@(upgrade.Cost > StateView.State.Faith)"
+                             OnBuy="() => UpgradeService.BuyUpgrade(upgrade)" />
+        </li>
+    }
+</ul>
+
+@code {
+    [Inject]
+    private UpgradeService UpgradeService { get; set; }
+    [Inject]
+    private StateView StateView { get; set; }
+}

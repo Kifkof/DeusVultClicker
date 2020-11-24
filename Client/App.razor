@@ -2,137 +2,13 @@
 @using System.Threading
 <header><h1>Deus Vult Clicker</h1></header>
 <main>
-    <div id="current-faith">Faith:  @StateView.State.Faith.ToString("n2") </div>
-    <div id="current-followers">Followers:  @StateView.State.Followers / @BuildingService.Reach</div>
-    <div id="available-space">Available space:  @BuildingService.AvailableSpace</div>
-    <div id="current-money">Cash:  @StateView.State.Money.ToString("n2")</div>
-    <div id="secondary-click-container">
-        <button class="btn btn-primary" @onclick="IncrementFaith">Pray</button>
-    </div>
-    <div id="primary-click-container">
-        <button class="btn btn-primary" @onclick="IncrementFollowers">Proselytize</button>
-    </div>
-    <div id="era-container">
-        <h3>Era advancements</h3>
-        @if (EraService.AvailableEraAdvancement != null)
-        {
-            <AdvancementCard Title="@EraService.AvailableEraAdvancement.Title"
-                             Description="@EraService.AvailableEraAdvancement.Description"
-                             EffectDescription="@EraService.AvailableEraAdvancement.EffectDescription"
-                             FlavorText="@EraService.AvailableEraAdvancement.FlavorText"
-                             Cost="@($"{EraService.AvailableEraAdvancement.Cost} Faith")"
-                             Disabled="@(EraService.AvailableEraAdvancement.Cost > StateView.State.Faith)"
-                             OnBuy="() => EraService.AdvanceToEra(EraService.AvailableEraAdvancement)" />
-        }
-        else
-        {
-            <span>No era advancement available.</span>
-        }
-    </div>
-    <div id="owned-buildings-container">
-        <h3>Owned buildings</h3>
-        <ul>
-            @foreach (var building in BuildingService.OwnedBuildings)
-            {
-                <li>
-                    <span class="building-title">@building.Title</span>
-                    <span class="building-effect-description">@building.EffectDescription</span>
-                    <button class="btn btn-warning" type="button" @onclick="() => BuildingService.DemolishBuilding(building)">Demolish</button>
-                </li>
-            }
-        </ul>
-    </div>
-    <div id="available-buildings-container">
-        <h3>Available buildings</h3>
-        <ul>
-            @foreach (var building in BuildingService.AvailableBuildings)
-            {
-                <li>
-                    <AdvancementCard Title="@building.Title"
-                                     Description="@building.Description"
-                                     EffectDescription="@building.EffectDescription"
-                                     FlavorText="@building.FlavorText"
-                                     Cost="@($"{building.Cost} Cash")"
-                                     Disabled="@(building.Cost > StateView.State.Money || building.SpaceRequirement > BuildingService.AvailableSpace)"
-                                     OnBuy="() => BuildingService.BuyBuilding(building)" />
-                </li>
-            }
-        </ul>
-    </div>
-    <div id="upgrades-container">
-        <h3>Faith upgrades</h3>
-        <ul>
-            @foreach (var upgrade in UpgradeService.AvailableUpgrades)
-            {
-                <li>
-                    <AdvancementCard Title="@upgrade.Title"
-                                     Description="@upgrade.Description"
-                                     EffectDescription="@upgrade.EffectDescription"
-                                     FlavorText="@upgrade.FlavorText"
-                                     Cost="@($"{upgrade.Cost} Faith")"
-                                     Disabled="@(upgrade.Cost > StateView.State.Faith)"
-                                     OnBuy="() => UpgradeService.BuyUpgrade(upgrade)" />
-                </li>
-            }
-        </ul>
-    </div>
+   <Grid IncrementFaith="@IncrementFaith" IncrementFollowers="@IncrementFollowers"></Grid>
 </main>
 <footer>Footer</footer>
 <style>
     main {
         flex: 1;
-        display: grid;
-        grid-template: "cft cfl as cm cm" 5% "scc pcc obc abc uc" auto "ec ec obc abc uc" auto / 10% 10% 1fr 1fr 1fr
     }
-
-    #current-faith {
-        grid-area: cft;
-    }
-
-    #current-followers {
-        grid-area: cfl;
-    }
-
-    #current-money {
-        grid-area: cm;
-    }
-
-    #available-space {
-        grid-area: as;
-    }
-
-    #secondary-click-container {
-        grid-area: scc;
-    }
-
-    #primary-click-container {
-        grid-area: pcc;
-    }
-
-    #era-container {
-        grid-area: ec;
-    }
-
-    #owned-buildings-container {
-        grid-area: obc;
-    }
-
-    #available-buildings-container {
-        grid-area: abc;
-    }
-
-    #upgrades-container {
-        grid-area: uc;
-    }
-
-        #upgrades-container ul, #available-building-container ul, #owned-buildings-container u {
-            list-style-type: none;
-        }
-
-            #upgrades-container ul li, #available-buildings-container ul li, #owned-buildings-container ul li, #era-container {
-                display: flex;
-                flex-direction: column;
-            }
 </style>
 
 @code
@@ -140,13 +16,7 @@
     private int intervalInMs = 50;
 
     [Inject]
-    private EraService EraService { get; set; }
-
-    [Inject]
     private BuildingService BuildingService { get; set; }
-
-    [Inject]
-    private UpgradeService UpgradeService { get; set; }
 
     [Inject]
     private StateView StateView { get; set; }
