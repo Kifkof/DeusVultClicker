@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DeusVultClicker.Client.Advancements;
 
@@ -38,6 +39,11 @@ namespace DeusVultClicker.Client.Services
         {
             this.stateView.State.BuildingState.OwnedBuildings.Remove(building);
         }
+        public List<Building> GetBuildingsByIds(IEnumerable<string> buildingIds) => buildingIds.Select(
+                i => Buildings.TryGetValue(i, out var building)
+                ? building
+                : throw new Exception($"Deserialization failed for building with id: {i}")
+            ).ToList();
 
         private static readonly Dictionary<string, Building> Buildings = new Dictionary<string, Building>()
         {
@@ -70,5 +76,7 @@ namespace DeusVultClicker.Client.Services
                 }
             }
         };
+
+
     }
 }

@@ -5,7 +5,7 @@ namespace DeusVultClicker.Client.State
 {
     public class EraState
     {
-        public List<string> PastEras { get; } = new List<string>{ StartEra.Id };
+        public List<string> PastEras { get; set; } = new List<string>{ StartEra.Id };
 
         public EraAdvancement Era { get; set; } = StartEra;
 

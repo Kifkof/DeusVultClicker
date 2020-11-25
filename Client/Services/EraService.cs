@@ -27,6 +27,7 @@ namespace DeusVultClicker.Client.Services
             this.stateView.State.EraState.Era = advancement;
             this.stateView.State.EraState.PastEras.Add(advancement.Id);
         }
+        public EraAdvancement GetEraAdvancementById(string id) => EraAdvancements.TryGetValue(id, out var advancement) ? advancement : null;
 
         private static readonly Dictionary<string, EraAdvancement> EraAdvancements = new Dictionary<string, EraAdvancement>()
         {

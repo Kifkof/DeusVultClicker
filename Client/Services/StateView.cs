@@ -7,12 +7,7 @@ namespace DeusVultClicker.Client.Services
 {
     public class StateView
     {
-        public ApplicationState State { get; }
-
-        public StateView()
-        {
-            this.State = new ApplicationState();
-        }
+        public ApplicationState State { get; set; } = new ApplicationState();
 
         public List<Advancement> AllAdvancements =>
             this.State.BuildingState.OwnedBuildings

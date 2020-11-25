@@ -1,11 +1,17 @@
 @using DeusVultClicker.Client.Services
 @using System.Threading
-<header><h1>Deus Vult Clicker</h1></header>
+<header><h1>Deus Vult Clicker</h1><SaveButton/></header>
 <main>
-   <Grid IncrementFaith="@IncrementFaith" IncrementFollowers="@IncrementFollowers"></Grid>
+    <Grid IncrementFaith="@IncrementFaith" IncrementFollowers="@IncrementFollowers"/>
 </main>
 <footer>Footer</footer>
 <style>
+    header{
+        display: flex;
+    }
+    header h1{
+        flex: 1;
+    }
     main {
         flex: 1;
     }
@@ -21,12 +27,19 @@
     [Inject]
     private StateView StateView { get; set; }
 
+    [Inject]
+    private SaveStateService SaveStateService { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
         var timer = new Timer(a => TimerOnElapsed(), null, 0, intervalInMs);
     }
-
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await SaveStateService.LoadFromStorageAsync();
+    }
     private Task TimerOnElapsed()
     {
         SetFaithOnNextTick();

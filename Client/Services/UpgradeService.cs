@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DeusVultClicker.Client.Advancements;
 using DeusVultClicker.Client.Advancements.Effects;
@@ -38,6 +39,11 @@ namespace DeusVultClicker.Client.Services
 
             this.stateView.State.UpgradeState.PurchasedUpgrades.Add(upgrade);
         }
+        public List<Upgrade> GetUpgradesByIds(IEnumerable<string> upgradeIds) => upgradeIds.Select(
+               i => Upgrades.TryGetValue(i, out var upgrade)
+               ? upgrade
+               : throw new Exception($"Deserialization failed for upgrade with id: {i}")
+            ).ToList();
 
         private static readonly Dictionary<string, Upgrade> Upgrades = new Dictionary<string, Upgrade>()
         {
@@ -56,5 +62,7 @@ namespace DeusVultClicker.Client.Services
                 }
             }
         };
+
+
     }
 }

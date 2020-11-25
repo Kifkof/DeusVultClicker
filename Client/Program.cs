@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
 using DeusVultClicker.Client.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,9 @@ namespace DeusVultClicker.Client
             builder.Services.AddTransient<BuildingService>();
             builder.Services.AddTransient<UpgradeService>();
             builder.Services.AddTransient<EraService>();
+            builder.Services.AddTransient<SaveStateService>();
+            builder.Services.AddBlazoredLocalStorage(config =>
+                config.JsonSerializerOptions.WriteIndented = true);
 
             await builder.Build().RunAsync();
         }

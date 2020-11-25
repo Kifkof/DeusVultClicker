@@ -5,6 +5,6 @@ namespace DeusVultClicker.Client.State
 {
     public class UpgradeState
     {
-        public List<Upgrade> PurchasedUpgrades { get; } = new List<Upgrade>();
+        public List<Upgrade> PurchasedUpgrades { get; set; } = new List<Upgrade>();
     }
 }
