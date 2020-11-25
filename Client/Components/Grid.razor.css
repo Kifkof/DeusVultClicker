@@ -1,0 +1,55 @@
+﻿#wrapper {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template: "cft cfl as cm cm" 5% "scc pcc obc abc uc" auto "ec ec obc abc uc" auto / 10% 10% 1fr 1fr 1fr;
+}
+
+#current-faith {
+    grid-area: cft;
+}
+
+#current-followers {
+    grid-area: cfl;
+}
+
+#current-money {
+    grid-area: cm;
+}
+
+#available-space {
+    grid-area: as;
+}
+
+#secondary-click-container {
+    grid-area: scc;
+}
+
+#primary-click-container {
+    grid-area: pcc;
+}
+
+#era-container {
+    grid-area: ec;
+}
+
+#owned-buildings-container {
+    grid-area: obc;
+}
+
+#available-buildings-container {
+    grid-area: abc;
+}
+
+#upgrades-container {
+    grid-area: uc;
+}
+
+    #upgrades-container ul, #available-building-container ul, #owned-buildings-container u {
+        list-style-type: none;
+    }
+
+        #upgrades-container ul li, #available-buildings-container ul li, #owned-buildings-container ul li, #era-container {
+            display: flex;
+            flex-direction: column;
+        }

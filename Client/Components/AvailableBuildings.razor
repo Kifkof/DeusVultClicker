@@ -1,0 +1,22 @@
+﻿<h3>Available buildings</h3>
+<ul>
+    @foreach (var building in BuildingService.AvailableBuildings)
+    {
+        <li>
+            <AdvancementCard Title="@building.Title"
+                             Description="@building.Description"
+                             EffectDescription="@building.EffectDescription"
+                             FlavorText="@building.FlavorText"
+                             Cost="@($"{building.Cost} Cash")"
+                             Disabled="@(building.Cost > StateView.State.Money || building.SpaceRequirement > BuildingService.AvailableSpace)"
+                             OnBuy="() => BuildingService.BuyBuilding(building)" />
+        </li>
+    }
+</ul>
+
+@code {
+    [Inject]
+    private BuildingService BuildingService { get; set; }
+    [Inject]
+    private StateView StateView { get; set; }
+}

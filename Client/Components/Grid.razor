@@ -1,0 +1,34 @@
+﻿<div id="wrapper">
+    <div id="current-faith">Faith:  @StateView.State.Faith.ToString("n2") </div>
+    <div id="current-followers">Followers:  @StateView.State.Followers / @BuildingService.Reach</div>
+    <div id="available-space">Available space:  @BuildingService.AvailableSpace</div>
+    <div id="current-money">Cash:  @StateView.State.Money.ToString("n2")</div>
+    <div id="secondary-click-container">
+        <button class="btn btn-primary" @onclick="@IncrementFaith">Pray</button>
+    </div>
+    <div id="primary-click-container">
+        <button class="btn btn-primary" @onclick="@IncrementFollowers">Proselytize</button>
+    </div>
+    <div id="era-container">
+        <EraAdvancment></EraAdvancment>
+    </div>
+    <div id="owned-buildings-container">
+        <OwnedBuildings></OwnedBuildings>
+    </div>
+    <div id="available-buildings-container">
+        <AvailableBuildings></AvailableBuildings>
+    </div>
+    <div id="upgrades-container">
+        <FaithUpgrades></FaithUpgrades>
+    </div>
+</div>
+@code {
+    [Inject]
+    private BuildingService BuildingService { get; set; }
+    [Inject]
+    private StateView StateView { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> IncrementFaith { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> IncrementFollowers { get; set; }
+}

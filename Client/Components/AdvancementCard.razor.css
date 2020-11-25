@@ -1,0 +1,13 @@
+﻿.title {
+     font-size: larger;
+     padding-bottom: .5em;
+ }
+
+.flavor-text {
+    font-size: smaller;
+    color: gray;
+}
+
+.cost {
+    padding-top: .5em;
+}
