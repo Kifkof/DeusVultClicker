@@ -1,0 +1,40 @@
+﻿@using Fluxor
+@using DeusVultClicker.Client.Shared.Store
+@using DeusVultClicker.Client.Building.Pages
+@using DeusVultClicker.Client.Era.Pages
+@using DeusVultClicker.Client.Upgrade.Pages
+@using DeusVultClicker.Client.Building.Store
+@using DeusVultClicker.Client.Shared.Store.Actions
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<div id="wrapper">
+    <div id="current-faith">Faith:  @AppState.Value.Faith.ToString("n2") </div>
+    <div id="current-followers">Followers:  @AppState.Value.Followers / @BuildingState.Value.Reach</div>
+    <div id="available-space">Available space:  @BuildingState.Value.AvailableSpace</div>
+    <div id="current-money">Cash:  @AppState.Value.Money.ToString("n2")</div>
+    <div id="secondary-click-container">
+        <button class="btn btn-primary" @onclick="() => Dispatcher.Dispatch(new AddFaithAction(AppState.Value.FaithPerClickModifier))">Pray</button>
+    </div>
+    <div id="primary-click-container">
+        <button class="btn btn-primary" @onclick="() => Dispatcher.Dispatch(new AddFollowersAction(1))">Proselytize</button>
+    </div>
+    <div id="era-container">
+        <EraAdvancment />
+    </div>
+    <div id="owned-buildings-container">
+        <OwnedBuildings />
+    </div>
+    <div id="available-buildings-container">
+        <AvailableBuildings />
+    </div>
+    <div id="upgrades-container">
+        <FaithUpgrades />
+    </div>
+</div>
+@code {
+    [Inject]
+    private IState<BuildingState> BuildingState { get; set; }
+    [Inject]
+    private IState<AppState> AppState { get; set; }
+    [Inject]
+    private IDispatcher Dispatcher { get; set; }
+}

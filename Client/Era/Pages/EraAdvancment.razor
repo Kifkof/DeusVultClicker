@@ -1,0 +1,29 @@
+﻿@using Fluxor
+@using DeusVultClicker.Client.Shared.Store
+@using DeusVultClicker.Client.Era.Store
+@using DeusVultClicker.Client.Shared.Store.Actions
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<h3>Era advancements</h3>
+@if (EraState.Value.AvailableEraAdvancement != null)
+{
+    <AdvancementCard Title="@EraState.Value.AvailableEraAdvancement.Title"
+                     Description="@EraState.Value.AvailableEraAdvancement.Description"
+                     EffectDescription="@EraState.Value.AvailableEraAdvancement.EffectDescription"
+                     FlavorText="@EraState.Value.AvailableEraAdvancement.FlavorText"
+                     Cost="@($"{EraState.Value.AvailableEraAdvancement.Cost} Faith")"
+                     Disabled="@(EraState.Value.AvailableEraAdvancement.Cost > AppState.Value.Faith)"
+                     OnBuy="() => Dispatcher.Dispatch(new AdvanceToEraAction(EraState.Value.AvailableEraAdvancement))" />
+}
+else
+{
+    <span>No era advancement available.</span>
+}
+
+@code {
+    [Inject]
+    private IState<EraState> EraState { get; set; }
+    [Inject]
+    private IState<AppState> AppState { get; set; }
+    [Inject]
+    private IDispatcher Dispatcher { get; set; }
+}

@@ -1,17 +1,24 @@
-@using DeusVultClicker.Client.Services
 @using System.Threading
-<header><h1>Deus Vult Clicker</h1><SaveButton/></header>
+@using DeusVultClicker.Client.Shared.Store
+@using DeusVultClicker.Client.Shared.Store.Actions
+@using Fluxor
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<Fluxor.Blazor.Web.StoreInitializer />
+
+<header><h1>Deus Vult Clicker</h1></header>
 <main>
-    <Grid IncrementFaith="@IncrementFaith" IncrementFollowers="@IncrementFollowers"/>
+    <Grid />
 </main>
 <footer>Footer</footer>
 <style>
-    header{
+    header {
         display: flex;
     }
-    header h1{
-        flex: 1;
-    }
+
+        header h1 {
+            flex: 1;
+        }
+
     main {
         flex: 1;
     }
@@ -22,59 +29,26 @@
     private int intervalInMs = 50;
 
     [Inject]
-    private BuildingService BuildingService { get; set; }
-
+    private IState<AppState> AppState { get; set; }
     [Inject]
-    private StateView StateView { get; set; }
+    private IDispatcher Dispatcher { get; set; }
 
-    [Inject]
-    private SaveStateService SaveStateService { get; set; }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        var timer = new Timer(a => TimerOnElapsed(), null, 0, intervalInMs);
-    }
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        await SaveStateService.LoadFromStorageAsync();
+        new Timer(a => TimerOnElapsed(), null, 0, intervalInMs);
     }
     private Task TimerOnElapsed()
     {
-        SetFaithOnNextTick();
-        SetMoneyOnNextTick();
+        Dispatcher.Dispatch(new AddFaithAction(ToTickValue(AppState.Value.FaithPerSecondModifier * AppState.Value.Followers)));
+        Dispatcher.Dispatch(new AddMoneyAction(ToTickValue(AppState.Value.MoneyPerSecondModifier * AppState.Value.Followers)));
         //SetFollowersOnNextTick();
         this.StateHasChanged();
         return Task.CompletedTask;
-    }
-
-    public void IncrementFaith()
-    {
-        StateView.State.Faith++;
-    }
-
-    public void IncrementFollowers()
-    {
-        if (StateView.State.Followers < BuildingService.Reach && new Random().NextDouble() < 0.3)
-        {
-            StateView.State.Followers++;
-        }
-    }
-
-    private void SetFaithOnNextTick()
-    {
-        StateView.State.Faith += StateView.State.Followers * ToTickValue(StateView.State.FaithPerSecondModifier);
-    }
-
-    private void SetMoneyOnNextTick()
-    {
-        StateView.State.Money += StateView.State.Followers * ToTickValue(StateView.State.MoneyPerSecondModifier);
     }
 
     private double ToTickValue(double valuePerSecond)
     {
         return valuePerSecond / (1000d / intervalInMs);
     }
-
 }
