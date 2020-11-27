@@ -1,0 +1,35 @@
+﻿@using DeusVultClicker.Client.Building.Store
+@using Fluxor
+@using DeusVultClicker.Client.Shared.Store
+@using DeusVultClicker.Client.Building.Store.Selectors;
+@using DeusVultClicker.Client.Era.Store;
+@using DeusVultClicker.Client.Shared.Store.Actions
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<h3>Available buildings</h3>
+<ul>
+    @foreach (var building in AvailableBuildingsSelector.SelectAvailableBuildings())
+    {
+        <li>
+                <AdvancementCard Title="@building.Title"
+                                 Description="@building.Description"
+                                 EffectDescription="@building.EffectDescription"
+                                 FlavorText="@building.FlavorText"
+                                 Cost="@($"{building.Cost} Cash")"
+                                 Disabled="@(building.Cost > AppState.Value.Money || building.SpaceRequirement > EraState.Value.Era.AvailableSpace - BuildingState.Value.OwnedBuildings.Sum(b => b.SpaceRequirement))"
+                                 OnBuy="() => Dispatcher.Dispatch(new BuyBuildingAction(building))" />
+            </li>
+    }
+</ul>
+
+@code {
+    [Inject]
+    private IState<BuildingState> BuildingState { get; set; }
+    [Inject]
+    private AvailableBuildingsSelector AvailableBuildingsSelector { get; set; }
+    [Inject]
+    private IState<AppState> AppState { get; set; }
+    [Inject]
+    private IState<EraState> EraState { get; set; }
+    [Inject]
+    private IDispatcher Dispatcher { get; set; }
+}
