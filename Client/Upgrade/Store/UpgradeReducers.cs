@@ -16,5 +16,10 @@ namespace DeusVultClicker.Client.Upgrade.Store
                 AvailableUpgrades = state.AvailableUpgrades.Where(u => u.Id != upgrade.Id)
             };
         }
+        [ReducerMethod]
+        public static UpgradeState ReduceSetUpgradeStateAction(UpgradeState state, SetUpgradeStateAction action)
+        {
+            return action.UpgradeState;
+        }
     }
 }

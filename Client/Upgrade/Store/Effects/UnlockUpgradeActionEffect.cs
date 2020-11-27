@@ -7,11 +7,10 @@ namespace DeusVultClicker.Client.Upgrade.Store.Effects
 {
     public class UnlockUpgradeActionEffect : Effect<UnlockUpgradeAction>
     {
+        [EffectMethod]
         protected override Task HandleAsync(UnlockUpgradeAction action, IDispatcher dispatcher)
         {
-            var upgrade = UpgradeStorage.Upgrades[action.Id];
-
-            foreach (var upgradeEffect in upgrade.Effects)
+            foreach (var upgradeEffect in UpgradeStorage.Upgrades[action.Id].Effects)
             {
                 switch (upgradeEffect)
                 {
@@ -20,7 +19,6 @@ namespace DeusVultClicker.Client.Upgrade.Store.Effects
                         break;
                 }
             }
-
             return Task.CompletedTask;
         }
     }

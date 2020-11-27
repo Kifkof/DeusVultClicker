@@ -37,5 +37,10 @@ namespace DeusVultClicker.Client.Shared.Store
         {
             return state with { Money = state.Money + action.Amount };
         }
+        [ReducerMethod]
+        public static AppState ReduceSetAppStateAction(AppState state, SetAppStateAction action)
+        {
+            return action.AppState;
+        }
     }
 }

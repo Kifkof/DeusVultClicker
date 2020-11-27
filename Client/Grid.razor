@@ -12,6 +12,7 @@
     <div id="current-followers">Followers:  @AppState.Value.Followers / @BuildingState.Value.Reach</div>
     <div id="available-space">Available space:  @EraState.Value.Era.AvailableSpace</div>
     <div id="current-money">Cash:  @AppState.Value.Money.ToString("n2")</div>
+    <div id="save-button"><SaveButton /></div>
     <div id="secondary-click-container">
         <button class="btn btn-primary" @onclick="() => Dispatcher.Dispatch(new AddFaithAction(AppState.Value.FaithPerClickModifier))">Pray</button>
     </div>

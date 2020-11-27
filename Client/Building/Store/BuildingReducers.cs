@@ -27,5 +27,11 @@ namespace DeusVultClicker.Client.Building.Store
                 Reach = state.Reach - building.Reach,
             };
         }
+
+        [ReducerMethod]
+        public static BuildingState ReduceSetBuildingStateAction(BuildingState state, SetBuildingStateAction action)
+        {
+            return action.BuildingState;
+        }
     }
 }

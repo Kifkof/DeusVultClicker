@@ -17,5 +17,11 @@ namespace DeusVultClicker.Client.Era.Store
                 PastEras = state.PastEras.Concat(new[] { action.Id })
             };
         }
+
+        [ReducerMethod]
+        public static EraState ReduceSetEraStateAction(EraState state, SetEraStateAction action)
+        {
+            return action.EraState;
+        }
     }
 }

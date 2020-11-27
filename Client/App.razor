@@ -26,7 +26,7 @@
 
 @code
 {
-    private int intervalInMs = 500;
+    private int intervalInMs = 5000;
 
     [Inject]
     private IState<AppState> AppState { get; set; }
@@ -36,6 +36,7 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
+        this.Dispatcher.Dispatch(new LoadSaveStateAction());
         var timer = new System.Timers.Timer(intervalInMs);
         timer.Elapsed += TimerOnElapsed;
         timer.Start();
