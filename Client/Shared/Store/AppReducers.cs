@@ -1,41 +1,42 @@
 ﻿using DeusVultClicker.Client.Shared.Store.Actions;
 using Fluxor;
+using System;
 
 namespace DeusVultClicker.Client.Shared.Store
 {
-    public class AppReducers
+    public static class AppReducers
     {
         [ReducerMethod]
-        public AppState ReduceBuyBuildingAction(AppState state, BuyBuildingAction action)
+        public static AppState ReduceBuyBuildingAction(AppState state, BuyBuildingAction action)
         {
-            return state with { Money = state.Money - action.Cost };
+            return state with { Money = state.Money - action.Cost, Timestamp = DateTime.Now };
         }
 
         [ReducerMethod]
-        public AppState ReduceUnlockUpgradeAction(AppState state, UnlockUpgradeAction action)
+        public static AppState ReduceUnlockUpgradeAction(AppState state, UnlockUpgradeAction action)
         {
-            return state with { Faith = state.Faith - action.Cost };
+            return state with { Faith = state.Faith - action.Cost, Timestamp = DateTime.Now };
         }
 
         [ReducerMethod]
-        public AppState ReduceAdvanceToEraAction(AppState state, AdvanceToEraAction action)
+        public static AppState ReduceAdvanceToEraAction(AppState state, AdvanceToEraAction action)
         {
-            return state with { Faith = state.Faith - action.Cost };
+            return state with { Faith = state.Faith - action.Cost, Timestamp = DateTime.Now };
         }
         [ReducerMethod]
-        public AppState ReduceAddFaithAction(AppState state, AddFaithAction action)
+        public static AppState ReduceAddFaithAction(AppState state, AddFaithAction action)
         {
-            return state with { Faith = state.Faith + action.Amount };
+            return state with { Faith = state.Faith + action.Amount, Timestamp = DateTime.Now };
         }
         [ReducerMethod]
-        public AppState ReduceAddFollowersAction(AppState state, AddFollowersAction action)
+        public static AppState ReduceAddFollowersAction(AppState state, AddFollowersAction action)
         {
-            return state with { Followers = state.Followers + action.Amount };
+            return state with { Followers = state.Followers + action.Amount, Timestamp = DateTime.Now };
         }
         [ReducerMethod]
-        public AppState ReduceAddMoneyAction(AppState state, AddMoneyAction action)
+        public static AppState ReduceAddMoneyAction(AppState state, AddMoneyAction action)
         {
-            return state with { Money = state.Money + action.Amount };
+            return state with { Money = state.Money + action.Amount, Timestamp = DateTime.Now };
         }
         [ReducerMethod]
         public static AppState ReduceSetAppStateAction(AppState state, SetAppStateAction action)

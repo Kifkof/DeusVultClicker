@@ -1,7 +1,6 @@
-@using System.Threading
-@using DeusVultClicker.Client.Shared.Store
-@using DeusVultClicker.Client.Shared.Store.Actions
 @using Fluxor
+@using DeusVultClicker.Client.Shared.Store.Actions
+@using DeusVultClicker.Client.Hooks
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 <Fluxor.Blazor.Web.StoreInitializer />
 
@@ -26,35 +25,14 @@
 
 @code
 {
-    private int intervalInMs = 5000;
-
-    [Inject]
-    private IState<AppState> AppState { get; set; }
     [Inject]
     private IDispatcher Dispatcher { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await base.OnInitializedAsync();
+        await base.OnAfterRenderAsync(firstRender);
         this.Dispatcher.Dispatch(new LoadSaveStateAction());
-        var timer = new System.Timers.Timer(intervalInMs);
-        timer.Elapsed += TimerOnElapsed;
-        timer.Start();
-    }
-
-    private void TimerOnElapsed(object _, EventArgs __)
-    {
-        if (AppState.Value.Followers != 0)
-        {
-            Dispatcher.Dispatch(new AddFaithAction(ToTickValue(AppState.Value.FaithPerSecondModifier * AppState.Value.Followers)));
-            Dispatcher.Dispatch(new AddMoneyAction(ToTickValue(AppState.Value.MoneyPerSecondModifier * AppState.Value.Followers)));
-        }
-        //SetFollowersOnNextTick();
-        this.StateHasChanged();
-    }
-
-    private double ToTickValue(double valuePerSecond)
-    {
-        return valuePerSecond / (1000d / intervalInMs);
+        Window.OnBlur += (_, _) => this.Dispatcher.Dispatch(new SaveSaveStateAction());
+        Window.OnFocus += (_, _) => this.Dispatcher.Dispatch(new LoadSaveStateAction());
     }
 }
