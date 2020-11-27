@@ -7,6 +7,6 @@ namespace DeusVultClicker.Client.Building.Store
     {
         public override string GetName() => "building-state";
 
-        protected override BuildingState GetInitialState() => new BuildingState(new List<Building>(), new List<Building>(), 0, 0);
+        protected override BuildingState GetInitialState() => new BuildingState(new List<Building>(), new List<Building>(), 0);
     }
 }

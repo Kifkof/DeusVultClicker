@@ -26,7 +26,7 @@
 
 @code
 {
-    private int intervalInMs = 50;
+    private int intervalInMs = 500;
 
     [Inject]
     private IState<AppState> AppState { get; set; }
@@ -36,15 +36,20 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        new Timer(a => TimerOnElapsed(), null, 0, intervalInMs);
+        var timer = new System.Timers.Timer(intervalInMs);
+        timer.Elapsed += TimerOnElapsed;
+        timer.Start();
     }
-    private Task TimerOnElapsed()
+
+    private void TimerOnElapsed(object _, EventArgs __)
     {
-        Dispatcher.Dispatch(new AddFaithAction(ToTickValue(AppState.Value.FaithPerSecondModifier * AppState.Value.Followers)));
-        Dispatcher.Dispatch(new AddMoneyAction(ToTickValue(AppState.Value.MoneyPerSecondModifier * AppState.Value.Followers)));
+        if (AppState.Value.Followers != 0)
+        {
+            Dispatcher.Dispatch(new AddFaithAction(ToTickValue(AppState.Value.FaithPerSecondModifier * AppState.Value.Followers)));
+            Dispatcher.Dispatch(new AddMoneyAction(ToTickValue(AppState.Value.MoneyPerSecondModifier * AppState.Value.Followers)));
+        }
         //SetFollowersOnNextTick();
         this.StateHasChanged();
-        return Task.CompletedTask;
     }
 
     private double ToTickValue(double valuePerSecond)

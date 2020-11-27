@@ -14,7 +14,6 @@ namespace DeusVultClicker.Client.Building.Store
             {
                 OwnedBuildings = state.OwnedBuildings.Concat(new[] { building }),
                 Reach = state.Reach + building.Reach,
-                AvailableSpace = state.AvailableSpace - building.SpaceRequirement
             };
         }
 
@@ -26,7 +25,6 @@ namespace DeusVultClicker.Client.Building.Store
             {
                 OwnedBuildings = state.OwnedBuildings.Where(b => b.Id != building.Id),
                 Reach = state.Reach - building.Reach,
-                AvailableSpace = state.AvailableSpace + building.SpaceRequirement
             };
         }
     }
