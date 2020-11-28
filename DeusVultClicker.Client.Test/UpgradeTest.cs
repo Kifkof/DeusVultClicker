@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DeusVultClicker.Client.Shared.Store;
 using DeusVultClicker.Client.Shared.Store.Actions;
 using DeusVultClicker.Client.Upgrades;
@@ -93,7 +94,7 @@ namespace DeusVultClicker.Client.Test
 
         public static IEnumerable<object[]> GetUnlockUpgradeData()
         {
-            yield return new object[] { new UpgradeTestData("beg") };
+            yield return new object[] { new UpgradeTestData("beg", new AppState(1000, 12, 0, DateTime.MaxValue, 50)) };
         }
 
         public struct UpgradeTestData
