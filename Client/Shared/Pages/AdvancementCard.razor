@@ -1,9 +1,16 @@
-﻿<span class="title">@Title</span>
-<span class="description">@Description</span>
-<span class="effect-description">@EffectDescription</span>
-<span class="flavor-text">@FlavorText</span>
-<span class="cost">@Cost</span>
-<button class="btn btn-primary" type="button" disabled="@Disabled" @onclick="@OnBuy">@BuyText</button>
+﻿<div class="card">
+    @*<div class="image">
+        <img src="error" />
+    </div>*@
+    <div class="content">
+        <h3 class="title">@Title</h3>
+        <span class="description">@Description</span>
+        <span class="effect-description">@EffectDescription</span><br />
+        <span class="flavor-text">@FlavorText</span>
+        <span class="cost">@Cost</span>
+    </div>
+    <button type="button" disabled="@Disabled" @onclick="@OnBuy">@BuyText</button>
+</div>
 
 @code {
     [Parameter]

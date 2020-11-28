@@ -1,0 +1,10 @@
+﻿#available-upgrdes-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+    #available-upgrdes-wrapper ::deep .card + .card {
+        margin-top: 5px;
+    }

@@ -1,13 +1,22 @@
-﻿.title {
-     font-size: larger;
-     padding-bottom: .5em;
- }
+﻿.card {
+    background-color: lightgray;
+    display: flex;
+    flex-direction: row;
+}
+
+.content {
+    flex: 1;
+}
+
+span {
+    font-size: .8em;
+}
 
 .flavor-text {
-    font-size: smaller;
-    color: gray;
+    font-style: italic;
+    color: dimgrey;
 }
 
 .cost {
-    padding-top: .5em;
+    font-weight: bold;
 }
