@@ -30,4 +30,10 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'test'
+    command: 'test --logger trx'
+
+- task: PublishTestResults@2
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+    failTaskOnFailedTests: true
