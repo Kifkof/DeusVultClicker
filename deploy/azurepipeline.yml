@@ -28,12 +28,7 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
   displayName: 'dotnet build $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
+- task: VSTest@2
   inputs:
-    command: 'test'
-
-- task: PublishTestResults@2
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
-    failTaskOnFailedTests: true
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
