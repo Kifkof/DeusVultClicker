@@ -1,0 +1,10 @@
+﻿@using Fluxor
+@using DeusVultClicker.Client.Shared.Store.Actions
+<button class="btn btn-sm" @onclick="()=> Dispatcher.Dispatch(new SaveSaveStateAction())">
+    <i class="material-icons">save</i>
+</button>
+
+@code {
+    [Inject]
+    private IDispatcher Dispatcher { get; set; }
+}

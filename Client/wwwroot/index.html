@@ -11,6 +11,7 @@
     <link href="DeusVultClicker.Client.styles.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +23,12 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
-<script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script>
+        window.onblur = _ => DotNet.invokeMethodAsync("DeusVultClicker.Client", "onBlurHook");
+        window.onfocus = _ => DotNet.invokeMethodAsync("DeusVultClicker.Client", "onFocusHook");
+    </script>
+    <script src="_content/Fluxor.Blazor.Web/scripts/index.js"></script>
 </body>
 
 </html>

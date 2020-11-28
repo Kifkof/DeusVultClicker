@@ -1,11 +1,23 @@
-@using DeusVultClicker.Client.Services
-@using System.Threading
+@using Fluxor
+@using DeusVultClicker.Client.Shared.Store.Actions
+@using DeusVultClicker.Client.Hooks
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<Fluxor.Blazor.Web.StoreInitializer />
+
 <header><h1>Deus Vult Clicker</h1></header>
 <main>
-   <Grid IncrementFaith="@IncrementFaith" IncrementFollowers="@IncrementFollowers"></Grid>
+    <Grid />
 </main>
 <footer>Footer</footer>
 <style>
+    header {
+        display: flex;
+    }
+
+        header h1 {
+            flex: 1;
+        }
+
     main {
         flex: 1;
     }
@@ -13,55 +25,14 @@
 
 @code
 {
-    private int intervalInMs = 50;
-
     [Inject]
-    private BuildingService BuildingService { get; set; }
+    private IDispatcher Dispatcher { get; set; }
 
-    [Inject]
-    private StateView StateView { get; set; }
-
-    protected override void OnInitialized()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        base.OnInitialized();
-        var timer = new Timer(a => TimerOnElapsed(), null, 0, intervalInMs);
+        await base.OnAfterRenderAsync(firstRender);
+        Dispatcher.Dispatch(new LoadSaveStateAction());
+        Window.OnBlur += (_, _) => Dispatcher.Dispatch(new SaveSaveStateAction());
+        Window.OnFocus += (_, _) => Dispatcher.Dispatch(new LoadSaveStateAction());
     }
-
-    private Task TimerOnElapsed()
-    {
-        SetFaithOnNextTick();
-        SetMoneyOnNextTick();
-        //SetFollowersOnNextTick();
-        this.StateHasChanged();
-        return Task.CompletedTask;
-    }
-
-    public void IncrementFaith()
-    {
-        StateView.State.Faith++;
-    }
-
-    public void IncrementFollowers()
-    {
-        if (StateView.State.Followers < BuildingService.Reach && new Random().NextDouble() < 0.3)
-        {
-            StateView.State.Followers++;
-        }
-    }
-
-    private void SetFaithOnNextTick()
-    {
-        StateView.State.Faith += StateView.State.Followers * ToTickValue(StateView.State.FaithPerSecondModifier);
-    }
-
-    private void SetMoneyOnNextTick()
-    {
-        StateView.State.Money += StateView.State.Followers * ToTickValue(StateView.State.MoneyPerSecondModifier);
-    }
-
-    private double ToTickValue(double valuePerSecond)
-    {
-        return valuePerSecond / (1000d / intervalInMs);
-    }
-
 }

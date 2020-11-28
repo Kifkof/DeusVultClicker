@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeusVultClicker.Server", "Server\DeusVultClicker.Server.csproj", "{654EA9ED-F6E4-4BC7-94FD-C9F78E51D12E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeusVultClicker.Server", "Server\DeusVultClicker.Server.csproj", "{654EA9ED-F6E4-4BC7-94FD-C9F78E51D12E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeusVultClicker.Client", "Client\DeusVultClicker.Client.csproj", "{481E26B6-22E9-4287-9D68-6C03AE29651D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeusVultClicker.Client", "Client\DeusVultClicker.Client.csproj", "{481E26B6-22E9-4287-9D68-6C03AE29651D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeusVultClicker.Shared", "Shared\DeusVultClicker.Shared.csproj", "{2755B6B2-CC84-4A6C-8AD0-D55859828FE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeusVultClicker.Shared", "Shared\DeusVultClicker.Shared.csproj", "{2755B6B2-CC84-4A6C-8AD0-D55859828FE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
