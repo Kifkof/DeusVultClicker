@@ -1,4 +1,4 @@
-﻿using DeusVultClicker.Client.Upgrade.Store;
+﻿using DeusVultClicker.Client.Upgrades.Store;
 
 namespace DeusVultClicker.Client.Shared.Store.Actions
 {

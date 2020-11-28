@@ -16,7 +16,7 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
         [EffectMethod]
         protected override Task HandleAsync(StartNewTimerAction action, IDispatcher dispatcher)
         {
-            timerService.StartNew(action.IntervalInMs, dispatcher);
+            this.timerService.StartNew(action.IntervalInMs, dispatcher);
             return Task.CompletedTask;
         }
     }

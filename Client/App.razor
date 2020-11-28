@@ -31,8 +31,8 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
-        this.Dispatcher.Dispatch(new LoadSaveStateAction());
-        Window.OnBlur += (_, _) => this.Dispatcher.Dispatch(new SaveSaveStateAction());
-        Window.OnFocus += (_, _) => this.Dispatcher.Dispatch(new LoadSaveStateAction());
+        Dispatcher.Dispatch(new LoadSaveStateAction());
+        Window.OnBlur += (_, _) => Dispatcher.Dispatch(new SaveSaveStateAction());
+        Window.OnFocus += (_, _) => Dispatcher.Dispatch(new LoadSaveStateAction());
     }
 }

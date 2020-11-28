@@ -1,8 +1,8 @@
-﻿using DeusVultClicker.Client.Building.Store;
-using DeusVultClicker.Client.Era.Store;
-using DeusVultClicker.Client.Upgrade.Store;
+﻿using DeusVultClicker.Client.Buildings.Store;
+using DeusVultClicker.Client.Eras.Store;
+using DeusVultClicker.Client.Upgrades.Store;
 
-namespace DeusVultClicker.Client.Shared.Store.Effects
+namespace DeusVultClicker.Client.Shared.Store
 {
     public class SaveState
     {

@@ -6,7 +6,7 @@
 
         public StartNewTimerAction(int intervalInMs)
         {
-            IntervalInMs = intervalInMs;
+            this.IntervalInMs = intervalInMs;
         }
     }
 }

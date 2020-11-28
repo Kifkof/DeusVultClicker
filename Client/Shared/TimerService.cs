@@ -1,8 +1,8 @@
 ﻿using DeusVultClicker.Client.Shared.Store;
 using DeusVultClicker.Client.Shared.Store.Actions;
-using DeusVultClicker.Client.Upgrade.Store.Selector;
 using Fluxor;
 using System.Timers;
+using DeusVultClicker.Client.Upgrades.Store.Selector;
 
 namespace DeusVultClicker.Client.Shared
 {
@@ -19,26 +19,28 @@ namespace DeusVultClicker.Client.Shared
         }
         public void StartNew(int intervalInMs, IDispatcher dispatcher)
         {
-            if (timer != null)
+            if (this.timer != null)
             {
-                timer.Stop();
-                timer.Elapsed -= TimerOnElapsed;
+                this.timer.Stop();
+                this.timer.Elapsed -= TimerOnElapsed;
             }
-            timer = new Timer(intervalInMs);
-            timer.Elapsed += TimerOnElapsed;
-            timer.Start();
+
+            this.timer = new Timer(intervalInMs);
+            this.timer.Elapsed += TimerOnElapsed;
+            this.timer.Start();
 
             void TimerOnElapsed(object sender, ElapsedEventArgs e)
             {
-                DispatchNextTick(sender as Timer, dispatcher);
+                this.DispatchNextTick(((Timer)sender).Interval, dispatcher);
             }
         }
-        private void DispatchNextTick(Timer timer, IDispatcher dispatcher)
+
+        private void DispatchNextTick(double interval, IDispatcher dispatcher)
         {
-            if (appState.Value.Followers != 0)
+            if (this.appState.Value.Followers != 0)
             {
-                dispatcher.Dispatch(new AddFaithAction(ToTickValue(upgradeEffectsSelector.SelectFaithPerFollowerIncrease() * appState.Value.Followers, timer.Interval)));
-                dispatcher.Dispatch(new AddMoneyAction(ToTickValue(upgradeEffectsSelector.SelectMoneyPerFollowerIncrease() * appState.Value.Followers, timer.Interval)));
+                dispatcher.Dispatch(new AddFaithAction(ToTickValue(this.upgradeEffectsSelector.SelectFaithPerFollowerIncrease() * this.appState.Value.Followers, interval)));
+                dispatcher.Dispatch(new AddMoneyAction(ToTickValue(this.upgradeEffectsSelector.SelectMoneyPerFollowerIncrease() * this.appState.Value.Followers, interval)));
             }
         }
         public static double ToTickValue(double valuePerSecond, double intervalInMs)

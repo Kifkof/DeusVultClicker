@@ -1,4 +1,4 @@
-﻿using DeusVultClicker.Client.Era.Store;
+﻿using DeusVultClicker.Client.Eras.Store;
 
 namespace DeusVultClicker.Client.Shared.Store.Actions
 {

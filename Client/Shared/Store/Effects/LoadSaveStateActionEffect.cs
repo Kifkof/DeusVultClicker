@@ -1,11 +1,11 @@
 ﻿using Blazored.LocalStorage;
 using DeusVultClicker.Client.Shared.Store.Actions;
-using DeusVultClicker.Client.Upgrade.Store;
-using DeusVultClicker.Client.Upgrade.Store.Selector;
 using Fluxor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using DeusVultClicker.Client.Upgrades.Store.Selector;
 
 namespace DeusVultClicker.Client.Shared.Store.Effects
 {
@@ -19,14 +19,15 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
             this.localStorageService = localStorageService;
             this.appState = appState;
         }
+
         [EffectMethod]
-        protected async override Task HandleAsync(LoadSaveStateAction _, IDispatcher dispatcher)
+        protected override async Task HandleAsync(LoadSaveStateAction _, IDispatcher dispatcher)
         {
-            var saveState = await localStorageService.GetItemAsync<SaveState>("savestate");
-            var interval = appState.Value.IntervalInMs;
+            var saveState = await this.localStorageService.GetItemAsync<SaveState>("savestate");
+            var interval = this.appState.Value.IntervalInMs;
             if (saveState != null)
             {
-                saveState.AppState = SimulatePastTicks(saveState.AppState, saveState.UpgradeState.PurchasedUpgradeIds);
+                saveState.AppState = SimulatePastTicks(saveState.AppState, saveState.UpgradeState.PurchasedUpgradeIds.ToList());
                 dispatcher.Dispatch(new SetBuildingStateAction(saveState.BuildingState));
                 dispatcher.Dispatch(new SetEraStateAction(saveState.EraState));
                 dispatcher.Dispatch(new SetUpgradeStateAction(saveState.UpgradeState));
@@ -36,7 +37,7 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
             dispatcher.Dispatch(new StartNewTimerAction(interval));
         }
 
-        private static AppState SimulatePastTicks(AppState appState, IEnumerable<string> purchasedUpgradeIds)
+        private static AppState SimulatePastTicks(AppState appState, IReadOnlyCollection<string> purchasedUpgradeIds)
         {
             var (interval, numberOfPastTicks) = GetSimulationParameters(appState);
             var faithGain = 0d;
@@ -56,6 +57,7 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
                 Timestamp = DateTime.Now
             };
         }
+
         private static (double interval, int numberOfPastTicks) GetSimulationParameters(AppState appState)
         {
             const int maxTicks = 100000;

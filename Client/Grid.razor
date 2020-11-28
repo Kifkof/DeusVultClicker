@@ -1,12 +1,12 @@
 ﻿@using Fluxor
 @using DeusVultClicker.Client.Shared.Store
 @using DeusVultClicker.Client.Building.Pages
+@using DeusVultClicker.Client.Buildings.Store
 @using DeusVultClicker.Client.Era.Pages
 @using DeusVultClicker.Client.Upgrade.Pages
-@using DeusVultClicker.Client.Building.Store
-@using DeusVultClicker.Client.Era.Store
-@using DeusVultClicker.Client.Upgrade.Store.Selector
+@using DeusVultClicker.Client.Eras.Store
 @using DeusVultClicker.Client.Shared.Store.Actions
+@using DeusVultClicker.Client.Upgrades.Store.Selector
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 <div id="wrapper">
     <div id="current-faith">Faith:  @AppState.Value.Faith.ToString("n2") </div>
