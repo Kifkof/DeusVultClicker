@@ -24,7 +24,10 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
-    <script>window.onblur = _ => DotNet.invokeMethodAsync("DeusVultClicker.Client", "onBlurHook");</script>
+    <script>
+        window.onblur = _ => DotNet.invokeMethodAsync("DeusVultClicker.Client", "onBlurHook");
+        window.onfocus = _ => DotNet.invokeMethodAsync("DeusVultClicker.Client", "onFocusHook");
+    </script>
     <script src="_content/Fluxor.Blazor.Web/scripts/index.js"></script>
 </body>
 

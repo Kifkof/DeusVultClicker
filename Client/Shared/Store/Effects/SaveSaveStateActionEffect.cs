@@ -1,11 +1,10 @@
 ﻿using Blazored.LocalStorage;
-using DeusVultClicker.Client.Building.Store;
-using DeusVultClicker.Client.Era.Store;
 using DeusVultClicker.Client.Shared.Store.Actions;
-using DeusVultClicker.Client.Upgrade.Store;
 using Fluxor;
-using System;
 using System.Threading.Tasks;
+using DeusVultClicker.Client.Buildings.Store;
+using DeusVultClicker.Client.Eras.Store;
+using DeusVultClicker.Client.Upgrades.Store;
 
 namespace DeusVultClicker.Client.Shared.Store.Effects
 {
@@ -25,15 +24,16 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
             this.upgradeState = upgradeState;
             this.appState = appState;
         }
+
         [EffectMethod]
-        protected async override Task HandleAsync(SaveSaveStateAction _, IDispatcher dispatcher)
+        protected override async Task HandleAsync(SaveSaveStateAction _, IDispatcher dispatcher)
         {
-            await localStorageService.SetItemAsync("savestate", new SaveState
+            await this.localStorageService.SetItemAsync("savestate", new SaveState
             {
-                BuildingState = buildingState.Value,
-                EraState = eraState.Value,
-                UpgradeState = upgradeState.Value,
-                AppState = appState.Value
+                BuildingState = this.buildingState.Value,
+                EraState = this.eraState.Value,
+                UpgradeState = this.upgradeState.Value,
+                AppState = this.appState.Value
             });
         }
 
