@@ -2,9 +2,9 @@
 {
     public class FaithPerClickUpgradeEffect : IUpgradeEffect
     {
-        public FaithPerClickUpgradeEffect(double FaithPerClickIncrease)
+        public FaithPerClickUpgradeEffect(double faithPerClickIncrease)
         {
-            this.FaithPerClickIncrease = FaithPerClickIncrease;
+            this.FaithPerClickIncrease = faithPerClickIncrease;
         }
 
         public double FaithPerClickIncrease { get; }
