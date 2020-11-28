@@ -11,6 +11,7 @@ namespace DeusVultClicker.Client.Upgrades.Store
         {
             return state with { PurchasedUpgradeIds = state.PurchasedUpgradeIds.Concat(new[] { action.Id }) };
         }
+
         [ReducerMethod]
         public static UpgradeState ReduceSetUpgradeStateAction(UpgradeState state, SetUpgradeStateAction action)
         {
