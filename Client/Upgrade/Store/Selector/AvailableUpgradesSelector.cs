@@ -15,7 +15,9 @@ namespace DeusVultClicker.Client.Upgrade.Store.Selector
         public IEnumerable<Upgrade> SelectAvailableUpgrades()
         {
             var ownedAdvancmenets = ownedAdvancmenetsSelector.SelectOwnedAdvancements();
-            return UpgradeStorage.Upgrades.Select(kv => kv.Value).Where(e => e.Prerequisites.All(p => ownedAdvancmenets.Any(o => o == p)));
+            return UpgradeStorage.Upgrades.Select(kv => kv.Value).Where(u =>
+                !ownedAdvancmenets.Contains(u.Id) && u.Prerequisites.All(p => ownedAdvancmenets.Any(o => o == p)));
         }
     }
+
 }

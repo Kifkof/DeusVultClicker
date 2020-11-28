@@ -2,5 +2,5 @@
 
 namespace DeusVultClicker.Client.Building.Store
 {
-    public record BuildingState(IEnumerable<Building> OwnedBuildings, IEnumerable<Building> AvailableBuildings, int Reach);
+    public record BuildingState(IEnumerable<Building> OwnedBuildings, int Reach);
 }

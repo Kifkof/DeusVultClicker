@@ -7,6 +7,6 @@ namespace DeusVultClicker.Client.Shared.Store
     {
         public override string GetName() => "App";
 
-        protected override AppState GetInitialState() => new AppState(0, 0, 0, 0 , 0.2, 1, DateTime.Now, 50);
+        protected override AppState GetInitialState() => new AppState(0, 0, 0, DateTime.Now, 50);
     }
 }

@@ -26,6 +26,7 @@ namespace DeusVultClicker.Client
             builder.Services.AddTransient<AvailableBuildingsSelector>();
             builder.Services.AddTransient<OwnedAdvancmenetsSelector>();
             builder.Services.AddTransient<AvailableEraSelector>();
+            builder.Services.AddTransient<UpgradeEffectsSelector>();
             builder.Services.AddScoped<TimerService>();
 
             builder.Services.AddFluxor(options => options.ScanAssemblies(typeof(Program).Assembly).UseReduxDevTools());

@@ -13,7 +13,6 @@ namespace DeusVultClicker.Client.Era.Store
             return state with
             {
                 Era = era,
-                AvailableEraAdvancement = null,
                 PastEras = state.PastEras.Concat(new[] { action.Id })
             };
         }

@@ -24,7 +24,7 @@ namespace DeusVultClicker.Client.Shared.Store.Selectors
         {
             return new List<string>() { eraState.Value.Era.Id }
             .Union(buildingState.Value.OwnedBuildings.Select(i => i.Id))
-            .Union(upgradeState.Value.PurchasedUpgrades.Select(i => i.Id));
+            .Union(upgradeState.Value.PurchasedUpgradeIds);
         }
     }
 }

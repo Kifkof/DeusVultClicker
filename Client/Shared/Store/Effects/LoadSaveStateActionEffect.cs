@@ -1,7 +1,10 @@
 ﻿using Blazored.LocalStorage;
 using DeusVultClicker.Client.Shared.Store.Actions;
+using DeusVultClicker.Client.Upgrade.Store;
+using DeusVultClicker.Client.Upgrade.Store.Selector;
 using Fluxor;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DeusVultClicker.Client.Shared.Store.Effects
@@ -23,7 +26,7 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
             var interval = appState.Value.IntervalInMs;
             if (saveState != null)
             {
-                saveState.AppState = SimulatePastTicks(saveState.AppState);
+                saveState.AppState = SimulatePastTicks(saveState.AppState, saveState.UpgradeState.PurchasedUpgradeIds);
                 dispatcher.Dispatch(new SetBuildingStateAction(saveState.BuildingState));
                 dispatcher.Dispatch(new SetEraStateAction(saveState.EraState));
                 dispatcher.Dispatch(new SetUpgradeStateAction(saveState.UpgradeState));
@@ -33,7 +36,7 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
             dispatcher.Dispatch(new StartNewTimerAction(interval));
         }
 
-        private static AppState SimulatePastTicks(AppState appState)
+        private static AppState SimulatePastTicks(AppState appState, IEnumerable<string> purchasedUpgradeIds)
         {
             var (interval, numberOfPastTicks) = GetSimulationParameters(appState);
             var faithGain = 0d;
@@ -42,8 +45,8 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
             {
                 if (appState.Followers != 0)
                 {
-                    faithGain += TimerService.ToTickValue(appState.FaithPerSecondModifier * appState.Followers, interval);
-                    moneyGain += TimerService.ToTickValue(appState.MoneyPerSecondModifier * appState.Followers, interval);
+                    faithGain += TimerService.ToTickValue(UpgradeEffectsSelectorHelper.SelectFaithPerFollowerIncrease(purchasedUpgradeIds) * appState.Followers, interval);
+                    moneyGain += TimerService.ToTickValue(UpgradeEffectsSelectorHelper.SelectMoneyPerFollowerIncrease(purchasedUpgradeIds) * appState.Followers, interval);
                 }
             }
             return appState with
@@ -56,12 +59,12 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
         private static (double interval, int numberOfPastTicks) GetSimulationParameters(AppState appState)
         {
             const int maxTicks = 100000;
-            var timeStamp = DateTime.Now.Subtract(appState.Timestamp);
+            var timePast = DateTime.Now.Subtract(appState.Timestamp);
             var interval = appState.IntervalInMs;
-            var numberOfPastTicks = (int)timeStamp.TotalMilliseconds / interval;
+            var numberOfPastTicks = (int)timePast.TotalMilliseconds / interval;
             if (numberOfPastTicks > maxTicks)
             {
-                interval = (int)timeStamp.TotalMilliseconds / maxTicks;
+                interval = (int)timePast.TotalMilliseconds / maxTicks;
                 numberOfPastTicks = maxTicks;
             }
             return (interval, numberOfPastTicks);

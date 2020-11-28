@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DeusVultClicker.Client.Upgrade.UpgradeEffects;
 
 namespace DeusVultClicker.Client.Upgrade
@@ -7,6 +8,34 @@ namespace DeusVultClicker.Client.Upgrade
     {
         public static readonly Dictionary<string, Upgrade> Upgrades = new Dictionary<string, Upgrade>
         {
+            {
+                "base-faith-per-follower",
+                new Upgrade
+                {
+                    Id = "base-faith-per-follower",
+                    Title = "",
+                    Description = "",
+                    EffectDescription = "",
+                    FlavorText = "",
+                    Cost = 0,
+                    Prerequisites = Enumerable.Empty<string>(),
+                    Effects = new[] { new FaithPerFollowerUpgradeEffect(0.2) }
+                }
+            },
+             {
+                "base-faith-per-click",
+                new Upgrade
+                {
+                    Id = "base-faith-per-click",
+                    Title = "",
+                    Description = "",
+                    EffectDescription = "",
+                    FlavorText = "",
+                    Cost = 0,
+                    Prerequisites = Enumerable.Empty<string>(),
+                    Effects = new[] { new FaithPerClickUpgradeEffect(1) }
+                }
+            },
             {
                 "beg",
                 new Upgrade
@@ -18,7 +47,7 @@ namespace DeusVultClicker.Client.Upgrade
                     FlavorText = "Beg for merc.....money",
                     Cost = 250,
                     Prerequisites = new[] { "post-religion-era" },
-                    Effects = new[] { new MoneyUpgradeEffect(0.1) }
+                    Effects = new[] { new MoneyPerFollowerIncreaseEffect(0.1) }
                 }
             }
         };

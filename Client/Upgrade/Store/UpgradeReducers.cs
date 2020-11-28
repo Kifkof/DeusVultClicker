@@ -9,12 +9,7 @@ namespace DeusVultClicker.Client.Upgrade.Store
         [ReducerMethod]
         public static UpgradeState ReduceUnlockUpgradeAction(UpgradeState state, UnlockUpgradeAction action)
         {
-            var upgrade = UpgradeStorage.Upgrades[action.Id];
-            return state with
-            {
-                PurchasedUpgrades = state.PurchasedUpgrades.Concat(new[] { upgrade }),
-                AvailableUpgrades = state.AvailableUpgrades.Where(u => u.Id != upgrade.Id)
-            };
+            return state with { PurchasedUpgradeIds = state.PurchasedUpgradeIds.Concat(new[] { action.Id }) };
         }
         [ReducerMethod]
         public static UpgradeState ReduceSetUpgradeStateAction(UpgradeState state, SetUpgradeStateAction action)

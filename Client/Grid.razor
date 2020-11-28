@@ -5,16 +5,17 @@
 @using DeusVultClicker.Client.Upgrade.Pages
 @using DeusVultClicker.Client.Building.Store
 @using DeusVultClicker.Client.Era.Store
+@using DeusVultClicker.Client.Upgrade.Store.Selector
 @using DeusVultClicker.Client.Shared.Store.Actions
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 <div id="wrapper">
     <div id="current-faith">Faith:  @AppState.Value.Faith.ToString("n2") </div>
     <div id="current-followers">Followers:  @AppState.Value.Followers / @BuildingState.Value.Reach</div>
-    <div id="available-space">Available space:  @EraState.Value.Era.AvailableSpace</div>
+    <div id="available-space">Available space:  @(EraState.Value.Era.AvailableSpace - BuildingState.Value.OwnedBuildings.Select(b => b.SpaceRequirement).Sum())</div>
     <div id="current-money">Cash:  @AppState.Value.Money.ToString("n2")</div>
     <div id="save-button"><SaveButton /></div>
     <div id="secondary-click-container">
-        <button class="btn btn-primary" @onclick="() => Dispatcher.Dispatch(new AddFaithAction(AppState.Value.FaithPerClickModifier))">Pray</button>
+        <button class="btn btn-primary" @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">Pray</button>
     </div>
     <div id="primary-click-container">
         <button class="btn btn-primary" disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)" @onclick="() => Dispatcher.Dispatch(new AddFollowersAction(1))">Proselytize</button>
@@ -39,6 +40,8 @@
     private IState<EraState> EraState { get; set; }
     [Inject]
     private IState<AppState> AppState { get; set; }
+    [Inject]
+    private UpgradeEffectsSelector UpgradeEffectsSelector { get; set; }
     [Inject]
     private IDispatcher Dispatcher { get; set; }
 }

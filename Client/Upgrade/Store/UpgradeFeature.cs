@@ -7,6 +7,6 @@ namespace DeusVultClicker.Client.Upgrade.Store
     {
         public override string GetName() => "Upgrade";
 
-        protected override UpgradeState GetInitialState() => new UpgradeState(new List<Upgrade>(), new List<Upgrade>());
+        protected override UpgradeState GetInitialState() => new UpgradeState(new[] { "base-faith-per-follower", "base-faith-per-click" });
     }
 }
