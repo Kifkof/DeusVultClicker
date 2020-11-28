@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeusVultClicker.Client", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeusVultClicker.Shared", "Shared\DeusVultClicker.Shared.csproj", "{2755B6B2-CC84-4A6C-8AD0-D55859828FE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeusVultClicker.Client.Test", "DeusVultClicker.Client.Test\DeusVultClicker.Client.Test.csproj", "{D0A2D591-F342-4BA9-B417-FE4F249BF263}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2755B6B2-CC84-4A6C-8AD0-D55859828FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2755B6B2-CC84-4A6C-8AD0-D55859828FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2755B6B2-CC84-4A6C-8AD0-D55859828FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0A2D591-F342-4BA9-B417-FE4F249BF263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0A2D591-F342-4BA9-B417-FE4F249BF263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0A2D591-F342-4BA9-B417-FE4F249BF263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0A2D591-F342-4BA9-B417-FE4F249BF263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

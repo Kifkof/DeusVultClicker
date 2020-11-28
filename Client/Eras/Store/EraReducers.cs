@@ -7,7 +7,7 @@ namespace DeusVultClicker.Client.Eras.Store
     public static class EraReducers
     {
         [ReducerMethod]
-        public static EraState ReduceBuyBuildingAction(EraState state, AdvanceToEraAction action)
+        public static EraState ReduceAdvanceToEraAction(EraState state, AdvanceToEraAction action)
         {
             var era = EraStorage.EraAdvancements[action.Id];
             return state with
