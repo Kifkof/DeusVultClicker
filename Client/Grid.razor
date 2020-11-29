@@ -1,39 +1,46 @@
-﻿@using Fluxor
-@using DeusVultClicker.Client.Shared.Store
+﻿@using DeusVultClicker.Client.Upgrades.Store.Selector
 @using DeusVultClicker.Client.Buildings.Pages
-@using DeusVultClicker.Client.Buildings.Store
-@using DeusVultClicker.Client.Eras.Pages
 @using DeusVultClicker.Client.Upgrades.Pages
-@using DeusVultClicker.Client.Eras.Store
-@using DeusVultClicker.Client.Shared.Store.Actions
-@using DeusVultClicker.Client.Upgrades.Store.Selector
+@using DeusVultClicker.Client.Eras.Store.Selectors
+@using DeusVultClicker.Client.Eras
+
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
-<div id="wrapper">
-    <div id="current-faith">Faith:  @AppState.Value.Faith.ToString("n2") </div>
-    <div id="current-followers">Followers:  @AppState.Value.Followers / @BuildingState.Value.Reach</div>
-    <div id="available-space">Available space:  @(EraState.Value.Era.AvailableSpace - BuildingState.Value.OwnedBuildings.Select(b => b.SpaceRequirement).Sum())</div>
-    <div id="current-money">Cash:  @AppState.Value.Money.ToString("n2")</div>
-    <div id="save-button"><SaveButton /></div>
-    <div id="secondary-click-container">
-        <button class="btn btn-primary" @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">Pray</button>
-    </div>
-    <div id="primary-click-container">
-        <button class="btn btn-primary" disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)" @onclick="() => Dispatcher.Dispatch(new AddFollowersAction(1))">Proselytize</button>
-    </div>
+<div id="grid-wrapper">
+    <div id="title"><h1>Deus Vult Clicker</h1></div>
     <div id="era-container">
-        <EraAdvancment />
+        <h2>@EraState.Value.Era.Title</h2>
+        @if (EraAdvancement != null)
+        {
+            <AdvancementCard Title="@EraAdvancement.Title"
+                             Cost="@($"{EraAdvancement.Cost} Faith")"
+                             Description="@EraAdvancement.Description"
+                             EffectDescription="@EraAdvancement.EffectDescription"
+                             FlavorText="@EraAdvancement.FlavorText"
+                             BuyText="Advance"
+                             Disabled="@(EraAdvancement.Cost > AppState.Value.Faith)"
+                             OnBuy="() => Dispatcher.Dispatch(new AdvanceToEraAction(EraAdvancement))" />
+        }
     </div>
-    <div id="owned-buildings-container">
-        <OwnedBuildings />
+    <div id="ability-container">
+        <button @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">
+            Pray
+        </button>
+        <button disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)"
+                @onclick="() => Dispatcher.Dispatch(new AddFollowersAction(1))">
+            Proselytize
+        </button>
     </div>
-    <div id="available-buildings-container">
-        <AvailableBuildings />
+    <div id="stats-container">
+        <Stats />
     </div>
-    <div id="upgrades-container">
-        <FaithUpgrades />
-    </div>
+    <div id="owned-buildings-container"><OwnedBuildings /></div>
+    <div id="available-buildings-container"><AvailableBuildings /></div>
+    <div id="faith-upgrades-container"><AvailableUpgrades /></div>
 </div>
 @code {
+    [Inject]
+    private AvailableEraSelector AvailableEraSelector { get; set; }
+    private EraAdvancement EraAdvancement => AvailableEraSelector.SelectAvailableEra();
     [Inject]
     private IState<BuildingState> BuildingState { get; set; }
     [Inject]

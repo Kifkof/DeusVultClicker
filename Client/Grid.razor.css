@@ -1,59 +1,48 @@
-﻿#wrapper {
+﻿#grid-wrapper {
     display: grid;
     height: 100%;
     width: 100%;
-    grid-template: "cft cfl as cm sb" 5% "scc pcc obc abc uc" auto "ec ec obc abc uc" auto / 10% 10% 1fr 1fr 1fr;
+    grid-template: "title era era" 12% "ability owned-buildings available-buildings" 30% "stats owned-buildings faith-upgrades" auto / calc((100% - 10px)/8*2) calc((100% - 10px)/8*3) calc((100% - 10px)/8*3);
+    gap: 5px;
 }
 
-#current-faith {
-    grid-area: cft;
+#title {
+    grid-area: title;
 }
 
-#current-followers {
-    grid-area: cfl;
-}
-
-#current-money {
-    grid-area: cm;
-}
-
-#save-button {
-    grid-area: sb;
-}
-
-#available-space {
-    grid-area: as;
-}
-
-#secondary-click-container {
-    grid-area: scc;
-}
-
-#primary-click-container {
-    grid-area: pcc;
-}
+    #title h1 {
+        font-size: 2.5em;
+    }
 
 #era-container {
-    grid-area: ec;
+    grid-area: era;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+#ability-container {
+    grid-area: ability;
+    display: flex;
+}
+
+    #ability-container button {
+        flex: 1;
+    }
+
+#stats-container {
+    grid-area: stats;
 }
 
 #owned-buildings-container {
-    grid-area: obc;
+    grid-area: owned-buildings;
 }
 
 #available-buildings-container {
-    grid-area: abc;
+    grid-area: available-buildings;
 }
 
-#upgrades-container {
-    grid-area: uc;
+#faith-upgrades-container {
+    grid-area: faith-upgrades;
 }
-
-    #upgrades-container ul, #available-building-container ul, #owned-buildings-container u {
-        list-style-type: none;
-    }
-
-        #upgrades-container ul li, #available-buildings-container ul li, #owned-buildings-container ul li, #era-container {
-            display: flex;
-            flex-direction: column;
-        }

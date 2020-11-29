@@ -1,0 +1,58 @@
+﻿#stats-wrapper {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    gap: 10px 10px;
+    grid-template: "follower-over-reach faith money" 1fr "time-follower-graph time-follower-graph time-follower-graph" 1fr "percentage-capcity-graph percentage-capcity-graph percentage-capcity-graph" 1fr "follower-est-time-90 follower-est-time-95 space" 1fr / calc((100% - 20px)/3) calc((100% - 20px)/3) calc((100% - 20px)/3);
+}
+
+.stat-card {
+    position: relative;
+    background: #333;
+    color: #fff;
+    line-height: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-card-title {
+    font-size: small;
+    top: 2px;
+    position: absolute;
+    color: #969696;
+}
+
+#stat-card-follower-over-reach {
+    grid-area: follower-over-reach;
+}
+
+#stat-card-faith {
+    grid-area: faith;
+}
+
+#stat-card-money {
+    grid-area: money;
+}
+
+#stat-card-time-follower-graph {
+    grid-area: time-follower-graph;
+}
+
+#stat-card-percentage-capcity-graph {
+    grid-area: percentage-capcity-graph;
+}
+
+#stat-card-follower-est-time-90 {
+    grid-area: follower-est-time-90;
+}
+
+#stat-card-follower-est-time-95 {
+    grid-area: follower-est-time-95;
+}
+
+#stat-card-space {
+    grid-area: space;
+}

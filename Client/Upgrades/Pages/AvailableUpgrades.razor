@@ -1,0 +1,24 @@
+﻿@using DeusVultClicker.Client.Upgrades.Store.Selector
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+<div id="available-upgrades-wrapper">
+    @foreach (var upgrade in AvailableUpgradesSelector.SelectAvailableUpgrades())
+    {
+        <AdvancementCard Title="@upgrade.Title"
+                         Description="@upgrade.Description"
+                         EffectDescription="@upgrade.EffectDescription"
+                         FlavorText="@upgrade.FlavorText"
+                         Cost="@($"{upgrade.Cost} Faith")"
+                         Disabled="@(upgrade.Cost > AppState.Value.Faith)"
+                         OnBuy="() => Dispatcher.Dispatch(new UnlockUpgradeAction(upgrade))" />
+
+    }
+</div>
+@code {
+    [Inject]
+    private AvailableUpgradesSelector AvailableUpgradesSelector { get; set; }
+    [Inject]
+    private IState<AppState> AppState { get; set; }
+    [Inject]
+    private IDispatcher Dispatcher { get; set; }
+}

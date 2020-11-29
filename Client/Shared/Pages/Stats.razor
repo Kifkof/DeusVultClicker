@@ -1,0 +1,44 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<div id="stats-wrapper">
+    <div class="stat-card" id="stat-card-follower-over-reach">
+        <span class="stat-card-title">Followers / Reach</span>
+        <span class="stat-card-content">@AppState.Value.Followers/@BuildingState.Value.Reach</span>
+    </div>
+    <div class="stat-card" id="stat-card-faith">
+        <span class="stat-card-title">Faith</span>
+        <span class="stat-card-content">@AppState.Value.Faith.ToString("n2")</span>
+    </div>
+    <div class="stat-card" id="stat-card-money">
+        <span class="stat-card-title">Money</span>
+        <span class="stat-card-content">@AppState.Value.Money.ToString("n2")</span>
+    </div>
+    <div class="stat-card" id="stat-card-time-follower-graph">
+        <span class="stat-card-title">time-follower-graph</span>
+        <span class="stat-card-content">graph</span>
+    </div>
+    <div class="stat-card" id="stat-card-percentage-capcity-graph">
+        <span class="stat-card-title">percentage-capcity-graph</span>
+        <span class="stat-card-content">graph</span>
+    </div>
+    <div class="stat-card" id="stat-card-follower-est-time-90">
+        <span class="stat-card-title">Est. 90%</span>
+        <span class="stat-card-content">1:30 h</span>
+    </div>
+    <div class="stat-card" id="stat-card-follower-est-time-95">
+        <span class="stat-card-title">Est. 95%</span>
+        <span class="stat-card-content">15 h</span>
+    </div>
+    <div class="stat-card" id="stat-card-space">
+        <span class="stat-card-title">Space</span>
+        <span class="stat-card-content"> @(EraState.Value.Era.AvailableSpace - BuildingState.Value.OwnedBuildings.Select(b => b.SpaceRequirement).Sum())</span>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    private IState<AppState> AppState { get; set; }
+    [Inject]
+    private IState<BuildingState> BuildingState { get; set; }
+    [Inject]
+    private IState<EraState> EraState { get; set; }
+}

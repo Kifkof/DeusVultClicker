@@ -1,19 +1,16 @@
-﻿@using DeusVultClicker.Client.Shared.Store.Actions
-@using Fluxor
-@using DeusVultClicker.Client.Buildings.Store
-@inherits Fluxor.Blazor.Web.Components.FluxorComponent
-
-<h3>Owned buildings</h3>
-<ul>
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+<div id="owned-buildings-wrapper">
     @foreach (var building in BuildingState.Value.OwnedBuildings)
     {
-        <li>
-            <span class="building-title">@building.Title</span>
-            <span class="building-effect-description">@building.EffectDescription</span>
-            <button class="btn btn-warning" type="button" @onclick="() => Dispatcher.Dispatch(new DemolishBuildingAction(building))">Demolish</button>
-        </li>
+        <AdvancementCard Title="@building.Title"
+                         Description="@building.Description"
+                         EffectDescription="@building.EffectDescription"
+                         FlavorText="@building.FlavorText"
+                         BuyText="Demolish"
+                         OnBuy="() =>  Dispatcher.Dispatch(new DemolishBuildingAction(building))" />
+
     }
-</ul>
+</div>
 
 @code {
     [Inject]

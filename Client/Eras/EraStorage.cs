@@ -7,7 +7,7 @@ namespace DeusVultClicker.Client.Eras
         public static EraAdvancement StartEra = new EraAdvancement
         {
             Id = "start-era",
-            Title = "",
+            Title = "Start era",
             Description = "",
             EffectDescription = "",
             FlavorText = "",
@@ -19,7 +19,7 @@ namespace DeusVultClicker.Client.Eras
         public static EraAdvancement JesusEra = new EraAdvancement
         {
             Id = "jesus-era",
-            Title = "Invent Jesus",
+            Title = "Jesus era",
             Description = "Please GOD send me a savior.",
             EffectDescription = "Sends the Messiah to earth.",
             FlavorText = "Jesus Christ it's Jesus Christ.",
@@ -43,9 +43,9 @@ namespace DeusVultClicker.Client.Eras
                 new EraAdvancement
                 {
                     Id = "post-religion-era",
-                    Title = "You could make a religion out of this!",
-                    Description = "Create a religion.",
-                    EffectDescription = "Now what?",
+                    Title = "Post religion era",
+                    Description = "You could make a religion out of this!",
+                    EffectDescription = "Create a religion.",
                     FlavorText = "No don't.",
                     Cost = 500,
                     Prerequisites = new[] { "jesus-era", "boulder" },

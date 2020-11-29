@@ -7,6 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="App.razor.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="App.razor.css" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
         <PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="3.9.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
