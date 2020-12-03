@@ -16,12 +16,12 @@ namespace DeusVultClicker.Client.DependecyInjection
         {
             serviceCollection.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
 
-            serviceCollection.AddTransient<AvailableUpgradesSelector>();
-            serviceCollection.AddTransient<AvailableBuildingsSelector>();
-            serviceCollection.AddTransient<OwnedAdvancementsSelector>();
-            serviceCollection.AddTransient<AvailableEraSelector>();
-            serviceCollection.AddTransient<UpgradeEffectsSelector>();
-            serviceCollection.AddTransient<TryAddFollowerActionEffect>();
+            serviceCollection.AddScoped<AvailableUpgradesSelector>();
+            serviceCollection.AddScoped<AvailableBuildingsSelector>();
+            serviceCollection.AddScoped<OwnedAdvancementsSelector>();
+            serviceCollection.AddScoped<AvailableEraSelector>();
+            serviceCollection.AddScoped<UpgradeEffectsSelector>();
+            serviceCollection.AddScoped<TryAddFollowerActionEffect>();
             serviceCollection.AddScoped<TimerService>();
 
             serviceCollection.AddFluxor(options =>
