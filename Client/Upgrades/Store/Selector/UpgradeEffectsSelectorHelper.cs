@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DeusVultClicker.Client.Upgrades.UpgradeEffects;
 
@@ -9,7 +10,7 @@ namespace DeusVultClicker.Client.Upgrades.Store.Selector
         public static double SelectMoneyPerFollowerIncrease(IEnumerable<string> purchasedUpgradeIds)
         {
             return AllEffects(purchasedUpgradeIds)
-                .OfType<MoneyPerFollowerIncreaseEffect>()
+                .OfType<MoneyPerFollowerUpgradeEffect>()
                 .Sum(e => e.MoneyPerFollowerIncrease);
         }
         public static double SelectFaithPerFollowerIncrease(IEnumerable<string> purchasedUpgradeIds)
@@ -24,6 +25,20 @@ namespace DeusVultClicker.Client.Upgrades.Store.Selector
                  .OfType<FaithPerClickUpgradeEffect>()
                  .Sum(e => e.FaithPerClickIncrease);
         }
+        public static double SelectAcquisitionFavorabilityIncrease(IEnumerable<string> purchasedUpgradeIds)
+        {
+            return AllEffects(purchasedUpgradeIds)
+                 .OfType<AcquisitionFavorabilityUpgradeEffect>()
+                 .Sum(e => e.AcquisitionFavorabilityIncrease);
+        }
+
+        public static int SelectFollowerPerClickIncrease(IEnumerable<string> purchasedUpgradeIds)
+        {
+            return AllEffects(purchasedUpgradeIds)
+                 .OfType<FollowerPerClickUpgradeEffect>()
+                 .Sum(e => e.FollowerPerClickIncrease);
+        }
+
         private static IEnumerable<IUpgradeEffect> AllEffects(IEnumerable<string> purchasedUpgradeIds)
         {
             return UpgradeStorage.Upgrades

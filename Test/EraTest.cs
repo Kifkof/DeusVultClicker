@@ -32,7 +32,7 @@ namespace DeusVultClicker.Client.Test
 
             //Assert
             var currentEra = this.ServiceProvider.GetRequiredService<IState<EraState>>();
-            Assert.Same(EraStorage.JesusEra,currentEra.Value.Era);
+            Assert.Same(EraStorage.JesusEra, currentEra.Value.Era);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace DeusVultClicker.Client.Upgrades.UpgradeEffects
 {
-    public class MoneyPerFollowerIncreaseEffect : IUpgradeEffect
+    public class MoneyPerFollowerUpgradeEffect : IUpgradeEffect
     {
-        public MoneyPerFollowerIncreaseEffect(double moneyPerFollowerIncrease)
+        public MoneyPerFollowerUpgradeEffect(double moneyPerFollowerIncrease)
         {
             this.MoneyPerFollowerIncrease = moneyPerFollowerIncrease;
         }
