@@ -70,7 +70,7 @@ namespace DeusVultClicker.Client.Test
             {
                 switch (upgradeEffect)
                 {
-                    case MoneyPerFollowerIncreaseEffect effect:
+                    case MoneyPerFollowerUpgradeEffect effect:
                         var currentMoneyModifier = this.ServiceProvider.GetRequiredService<UpgradeEffectsSelector>().SelectMoneyPerFollowerIncrease();
                         if (effect.MoneyPerFollowerIncrease != 0)
                             Assert.NotEqual(initialMoneyModifier, currentMoneyModifier);

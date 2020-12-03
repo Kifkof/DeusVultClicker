@@ -23,6 +23,13 @@ namespace DeusVultClicker.Client.Upgrades.Store.Selector
         {
             return UpgradeEffectsSelectorHelper.SelectFaithPerClickIncrease(this.upgradeState.Value.PurchasedUpgradeIds);
         }
-       
+        public double SelectAcquisitionFavorabilityIncrease()
+        {
+            return UpgradeEffectsSelectorHelper.SelectAcquisitionFavorabilityIncrease(this.upgradeState.Value.PurchasedUpgradeIds);
+        }
+        public int SelectFollowerPerClickIncrease()
+        {
+            return UpgradeEffectsSelectorHelper.SelectFollowerPerClickIncrease(this.upgradeState.Value.PurchasedUpgradeIds);
+        }
     }
 }

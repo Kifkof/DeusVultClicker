@@ -2,6 +2,7 @@
 using DeusVultClicker.Client.Buildings.Store.Selectors;
 using DeusVultClicker.Client.Eras.Store.Selectors;
 using DeusVultClicker.Client.Shared;
+using DeusVultClicker.Client.Shared.Store.Effects;
 using DeusVultClicker.Client.Shared.Store.Selectors;
 using DeusVultClicker.Client.Upgrades.Store.Selector;
 using Fluxor;
@@ -15,11 +16,12 @@ namespace DeusVultClicker.Client.DependecyInjection
         {
             serviceCollection.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
 
-            serviceCollection.AddTransient<AvailableUpgradesSelector>();
-            serviceCollection.AddTransient<AvailableBuildingsSelector>();
-            serviceCollection.AddTransient<OwnedAdvancementsSelector>();
-            serviceCollection.AddTransient<AvailableEraSelector>();
-            serviceCollection.AddTransient<UpgradeEffectsSelector>();
+            serviceCollection.AddScoped<AvailableUpgradesSelector>();
+            serviceCollection.AddScoped<AvailableBuildingsSelector>();
+            serviceCollection.AddScoped<OwnedAdvancementsSelector>();
+            serviceCollection.AddScoped<AvailableEraSelector>();
+            serviceCollection.AddScoped<UpgradeEffectsSelector>();
+            serviceCollection.AddScoped<TryAddFollowerActionEffect>();
             serviceCollection.AddScoped<TimerService>();
 
             serviceCollection.AddFluxor(options =>

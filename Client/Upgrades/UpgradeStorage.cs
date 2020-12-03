@@ -22,7 +22,7 @@ namespace DeusVultClicker.Client.Upgrades
                     Effects = new[] { new FaithPerFollowerUpgradeEffect(0.2) }
                 }
             },
-             {
+            {
                 "base-faith-per-click",
                 new Upgrade
                 {
@@ -34,6 +34,20 @@ namespace DeusVultClicker.Client.Upgrades
                     Cost = 0,
                     Prerequisites = Enumerable.Empty<string>(),
                     Effects = new[] { new FaithPerClickUpgradeEffect(1) }
+                }
+             },
+             {
+                "base-follower-per-click",
+                new Upgrade
+                {
+                    Id = "base-follower-per-click",
+                    Title = "",
+                    Description = "",
+                    EffectDescription = "",
+                    FlavorText = "",
+                    Cost = 0,
+                    Prerequisites = Enumerable.Empty<string>(),
+                    Effects = new[] { new FollowerPerClickUpgradeEffect(1) }
                 }
             },
             {
@@ -47,7 +61,7 @@ namespace DeusVultClicker.Client.Upgrades
                     FlavorText = "Beg for merc.....money",
                     Cost = 250,
                     Prerequisites = new[] { "post-religion-era" },
-                    Effects = new[] { new MoneyPerFollowerIncreaseEffect(0.1) }
+                    Effects = new[] { new MoneyPerFollowerUpgradeEffect(0.1) }
                 }
             }
         };

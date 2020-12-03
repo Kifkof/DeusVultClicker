@@ -26,7 +26,7 @@
             Pray
         </button>
         <button disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)"
-                @onclick="() => Dispatcher.Dispatch(new AddFollowersAction(1))">
+                @onclick="() => Dispatcher.Dispatch(new TryAddFollowersAction(UpgradeEffectsSelector.SelectFollowerPerClickIncrease()))">
             Proselytize
         </button>
     </div>
