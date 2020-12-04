@@ -1,18 +1,19 @@
-﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
-@switch (EraState.Value.Era.Id)
+﻿@using Shared.Store.Selectors;
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+@if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.ShowGrid))
 {
-    case "start-era":
-        <StartScreen />
-        break;
-    case "jesus-era":
-        <Grid AbilitiesToDisplay="@Grid.AbilitiesFlag.Primary" StatsToDisplay="@Stats.StatsFlag.CurrentFaith"/>
-        break;
-    default:
-        <Grid />
-        break;
+    <Grid />
+}
+else
+{
+    <StartScreen />
 }
 
 @code {
     [Inject]
-    private IState<EraState> EraState { get; set; }
+    private DisplayOptionsSelector DisplayOptionsSelector { get; set; }
+    
+    [Inject]
+    private IState<AppState> appState { get; set; } // needed for Fluxor change handling
 }

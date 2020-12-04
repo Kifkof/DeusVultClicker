@@ -22,7 +22,7 @@ namespace DeusVultClicker.Client.Shared.Store.Selectors
 
         public IEnumerable<string> SelectOwnedAdvancements()
         {
-            return new List<string>() {this.eraState.Value.Era.Id }
+            return new List<string>() { this.eraState.Value.Era.Id }
             .Union(this.buildingState.Value.OwnedBuildings.Select(i => i.Id))
             .Union(this.upgradeState.Value.PurchasedUpgradeIds);
         }

@@ -19,6 +19,7 @@ namespace DeusVultClicker.Client.DependecyInjection
             serviceCollection.AddScoped<AvailableUpgradesSelector>();
             serviceCollection.AddScoped<AvailableBuildingsSelector>();
             serviceCollection.AddScoped<OwnedAdvancementsSelector>();
+            serviceCollection.AddScoped<DisplayOptionsSelector>();
             serviceCollection.AddScoped<AvailableEraSelector>();
             serviceCollection.AddScoped<UpgradeEffectsSelector>();
             serviceCollection.AddScoped<TryAddFollowerActionEffect>();

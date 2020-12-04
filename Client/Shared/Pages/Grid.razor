@@ -2,6 +2,7 @@
 @using DeusVultClicker.Client.Buildings.Pages
 @using DeusVultClicker.Client.Upgrades.Pages
 @using DeusVultClicker.Client.Eras.Store.Selectors
+@using DeusVultClicker.Client.Shared.Store.Selectors
 @using Eras
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 
@@ -28,13 +29,13 @@
     @if (true)
     {
         <section id="ability-container">
-            @if (AbilitiesToDisplay.HasFlag(AbilitiesFlag.Primary))
+            @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.PrimaryAbility))
             {
                 <button @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">
                     Pray
                 </button>
             }
-            @if (AbilitiesToDisplay.HasFlag(AbilitiesFlag.Secondary))
+            @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.SecondaryAbility))
             {
                 <button disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)"
                         @onclick="() => Dispatcher.Dispatch(new TryAddFollowersAction(UpgradeEffectsSelector.SelectFollowerPerClickIncrease()))">
@@ -46,7 +47,7 @@
     @if (true)
     {
         <section id="stats-container">
-            <Stats StatsToDisplay="@StatsToDisplay" />
+            <Stats />
         </section>
     }
     @if (false)
@@ -83,19 +84,7 @@
     [Inject]
     private UpgradeEffectsSelector UpgradeEffectsSelector { get; set; }
     [Inject]
+    private DisplayOptionsSelector DisplayOptionsSelector { get; set; }
+    [Inject]
     private IDispatcher Dispatcher { get; set; }
-
-    [Parameter]
-    public AbilitiesFlag AbilitiesToDisplay { get; set; }
-
-    [Parameter]
-    public Stats.StatsFlag StatsToDisplay { get; set; }
-
-    [Flags]
-    public enum AbilitiesFlag
-    {
-        None,
-        Primary,
-        Secondary
-    }
 }

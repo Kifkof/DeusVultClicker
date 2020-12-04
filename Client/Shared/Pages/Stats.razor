@@ -1,4 +1,5 @@
-﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+﻿@using DeusVultClicker.Client.Shared.Store.Selectors
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
 <article id="stats-wrapper">
     @if (false)
     {
@@ -7,7 +8,7 @@
             <span class="stat-card-content">@AppState.Value.Followers/@BuildingState.Value.Reach</span>
         </section>
     }
-    @if (StatsToDisplay.HasFlag(StatsFlag.CurrentFaith))
+    @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.FaithStat))
     {
         <section class="stat-card" id="stat-card-faith">
             <span class="stat-card-title">Faith</span>
@@ -65,14 +66,6 @@
     private IState<BuildingState> BuildingState { get; set; }
     [Inject]
     private IState<EraState> EraState { get; set; }
-
-    [Parameter]
-    public StatsFlag StatsToDisplay { get; set; }
-
-    [Flags]
-    public enum StatsFlag
-    {
-        None,
-        CurrentFaith,
-    }
+    [Inject]
+    private DisplayOptionsSelector DisplayOptionsSelector { get; set; }
 }
