@@ -5,22 +5,26 @@
 @using DeusVultClicker.Client.Eras
 
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
-<div id="grid-wrapper">
-    <div id="title"><h1>Deus Vult Clicker</h1></div>
-    <div id="era-container">
-        <h2>@EraState.Value.Era.Title</h2>
-        @if (EraAdvancement != null)
-        {
-            <AdvancementCard Title="@EraAdvancement.Title"
-                             Cost="@($"{EraAdvancement.Cost} Faith")"
-                             Description="@EraAdvancement.Description"
-                             EffectDescription="@EraAdvancement.EffectDescription"
-                             FlavorText="@EraAdvancement.FlavorText"
-                             BuyText="Advance"
-                             Disabled="@(EraAdvancement.Cost > AppState.Value.Faith)"
-                             OnBuy="() => Dispatcher.Dispatch(new AdvanceToEraAction(EraAdvancement))" />
-        }
-    </div>
+<article>
+    <header>
+        <hgroup>
+            <h1>Deus Vult Clicker</h1>
+            <h2>@EraState.Value.Era.Title</h2>
+        </hgroup>
+        <section>
+            @if (EraAdvancement != null)
+            {
+                <AdvancementCard Title="@EraAdvancement.Title"
+                                 Cost="@($"{EraAdvancement.Cost} Faith")"
+                                 Description="@EraAdvancement.Description"
+                                 EffectDescription="@EraAdvancement.EffectDescription"
+                                 FlavorText="@EraAdvancement.FlavorText"
+                                 BuyText="Advance"
+                                 Disabled="@(EraAdvancement.Cost > AppState.Value.Faith)"
+                                 OnBuy="() => Dispatcher.Dispatch(new AdvanceToEraAction(EraAdvancement))" />
+            }
+        </section>
+    </header>
     <div id="ability-container">
         <button @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">
             Pray
@@ -36,7 +40,7 @@
     <div id="owned-buildings-container"><OwnedBuildings /></div>
     <div id="available-buildings-container"><AvailableBuildings /></div>
     <div id="faith-upgrades-container"><AvailableUpgrades /></div>
-</div>
+</article>
 @code {
     [Inject]
     private AvailableEraSelector AvailableEraSelector { get; set; }
