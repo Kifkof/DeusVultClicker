@@ -31,14 +31,20 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
 
         private int GetNumberOfAcquiredFollowers(int amount, double baseAcquisitionFavorability)
         {
-            return Enumerable.Range(0, amount).Where(_ => IsFollowerAcquired(baseAcquisitionFavorability)).Count();
+            var newTotalFollowers = Enumerable.Range(0, amount)
+                .Aggregate(appState.Value.Followers,
+                    (currentFollowers, _) =>
+                        IsFollowerAcquired(currentFollowers, baseAcquisitionFavorability)
+                        ? currentFollowers + 1
+                        : currentFollowers);
+            return newTotalFollowers - appState.Value.Followers;
         }
 
-        private bool IsFollowerAcquired(double baseAcquisitionFavorability)
+        private bool IsFollowerAcquired(double currentFollowers, double baseAcquisitionFavorability)
         {
             var diceRoll = new Random().NextDouble();
             var chance = CalculateFollowerAcquisitionChance(
-                               (double)appState.Value.Followers / buildingState.Value.Reach,
+                                currentFollowers / buildingState.Value.Reach,
                                 baseAcquisitionFavorability + upgradeEffectsSelector.SelectAcquisitionFavorabilityIncrease());
             return diceRoll < chance;
         }
