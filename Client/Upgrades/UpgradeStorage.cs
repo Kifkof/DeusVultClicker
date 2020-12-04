@@ -9,20 +9,6 @@ namespace DeusVultClicker.Client.Upgrades
         public static readonly Dictionary<string, Upgrade> Upgrades = new Dictionary<string, Upgrade>
         {
             {
-                "base-faith-per-follower",
-                new Upgrade
-                {
-                    Id = "base-faith-per-follower",
-                    Title = "",
-                    Description = "",
-                    EffectDescription = "",
-                    FlavorText = "",
-                    Cost = 0,
-                    Prerequisites = Enumerable.Empty<string>(),
-                    Effects = new[] { new FaithPerFollowerUpgradeEffect(0.2) }
-                }
-            },
-            {
                 "base-faith-per-click",
                 new Upgrade
                 {
@@ -34,20 +20,6 @@ namespace DeusVultClicker.Client.Upgrades
                     Cost = 0,
                     Prerequisites = Enumerable.Empty<string>(),
                     Effects = new[] { new FaithPerClickUpgradeEffect(1) }
-                }
-             },
-             {
-                "base-follower-per-click",
-                new Upgrade
-                {
-                    Id = "base-follower-per-click",
-                    Title = "",
-                    Description = "",
-                    EffectDescription = "",
-                    FlavorText = "",
-                    Cost = 0,
-                    Prerequisites = Enumerable.Empty<string>(),
-                    Effects = new[] { new FollowerPerClickUpgradeEffect(1) }
                 }
             },
             {
@@ -74,7 +46,7 @@ namespace DeusVultClicker.Client.Upgrades
                     EffectDescription = "faith per click +3",
                     FlavorText = "...",
                     Cost = 100,
-                    Prerequisites = new[] { "jesus-era","faith-per-click-1" },
+                    Prerequisites = new[] { "faith-per-click-1" },
                     Effects = new[] { new FaithPerClickUpgradeEffect(3) }
                 }
             },
@@ -88,11 +60,11 @@ namespace DeusVultClicker.Client.Upgrades
                     EffectDescription = "faith per click +5",
                     FlavorText = "...",
                     Cost = 450,
-                    Prerequisites = new[] { "jesus-era", "faith-per-click-1", "faith-per-click-3" },
+                    Prerequisites = new[] { "faith-per-click-3" },
                     Effects = new[] { new FaithPerClickUpgradeEffect(5) }
                 }
             },
-             {
+            {
                 "follower-introduction",
                 new Upgrade
                 {
@@ -102,8 +74,22 @@ namespace DeusVultClicker.Client.Upgrades
                     EffectDescription = "",
                     FlavorText = "...",
                     Cost = 500,
-                    Prerequisites = new[] { "jesus-era", "faith-per-click-1", "faith-per-click-3", "faith-per-click-5" },
+                    Prerequisites = new[] { "faith-per-click-5" },
                     Effects = new[] { new  BaseReachUpgradeEffect(12) }
+                }
+            },
+            {
+                "proclame-ability",
+                new Upgrade
+                {
+                    Id = "proclame-ability",
+                    Title = "Proclame",
+                    Description = "Covert people to your religion.",
+                    EffectDescription = "Gain 1 follower per click",
+                    FlavorText = "...",
+                    Cost = 500,
+                    Prerequisites = new[] { "follower-introduction" },
+                    Effects = new[] { new FollowerPerClickUpgradeEffect(1) }
                 }
             },
         };

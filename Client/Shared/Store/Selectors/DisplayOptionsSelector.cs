@@ -28,6 +28,7 @@ namespace DeusVultClicker.Client.Shared.Store.Selectors
                 {
                     "jesus-era" => DisplayOptions.Grid | DisplayOptions.PrimaryAbility | DisplayOptions.FaithStat | DisplayOptions.Upgrades,
                     "follower-introduction" => DisplayOptions.FollowerOverReachStat,
+                    "proclame-ability" => DisplayOptions.SecondaryAbility,
                     _ => DisplayOptions.None,
                 });
         }
