@@ -12,7 +12,6 @@ namespace DeusVultClicker.Client.Eras
             EffectDescription = "",
             FlavorText = "",
             Cost = 0,
-            EraName = "start-era",
             AvailableSpace = 0
         };
 
@@ -24,7 +23,6 @@ namespace DeusVultClicker.Client.Eras
             EffectDescription = "Sends the Messiah to earth.",
             FlavorText = "Jesus Christ it's Jesus Christ.",
             Cost = 50,
-            EraName = "jesus-era",
             AvailableSpace = 1
         };
 
@@ -49,7 +47,6 @@ namespace DeusVultClicker.Client.Eras
                     FlavorText = "No don't.",
                     Cost = 500,
                     Prerequisites = new[] { "jesus-era", "boulder" },
-                    EraName = "post-religion-era",
                     AvailableSpace = 1
                 }
             },
