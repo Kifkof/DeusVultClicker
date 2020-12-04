@@ -32,6 +32,11 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
 
         private int GetNumberOfAcquiredFollowers(int amount, double baseAcquisitionFavorability)
         {
+            if (appState.Value.Followers + amount <= 12) // first 12 Followers 100% chance
+            {
+                return amount;
+            }
+
             var newTotalFollowers = Enumerable.Range(0, amount)
                 .Aggregate(appState.Value.Followers,
                     (currentFollowers, _) =>
