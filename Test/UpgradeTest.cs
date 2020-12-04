@@ -4,7 +4,7 @@ using DeusVultClicker.Client.Shared.Store;
 using DeusVultClicker.Client.Shared.Store.Actions;
 using DeusVultClicker.Client.Upgrades;
 using DeusVultClicker.Client.Upgrades.Store;
-using DeusVultClicker.Client.Upgrades.Store.Selector;
+using DeusVultClicker.Client.Upgrades.Store.Selectors;
 using DeusVultClicker.Client.Upgrades.UpgradeEffects;
 using Fluxor;
 using Microsoft.Extensions.DependencyInjection;
@@ -77,13 +77,13 @@ namespace DeusVultClicker.Client.Test
                         Assert.Equal(initialMoneyModifier + effect.MoneyPerFollowerIncrease, currentMoneyModifier);
                         break;
                     case FaithPerFollowerUpgradeEffect effect:
-                        var currentFaithModifier = this.ServiceProvider.GetRequiredService<UpgradeEffectsSelector>().SelectMoneyPerFollowerIncrease();
+                        var currentFaithModifier = this.ServiceProvider.GetRequiredService<UpgradeEffectsSelector>().SelectFaithPerFollowerIncrease();
                         if (effect.FaithPerFollowerIncrease != 0)
                             Assert.NotEqual(initialFaithModifier, currentFaithModifier);
                         Assert.Equal(initialFaithModifier + effect.FaithPerFollowerIncrease, currentFaithModifier);
                         break;
                     case FaithPerClickUpgradeEffect effect:
-                        var currentFaithPerClickModifier = this.ServiceProvider.GetRequiredService<UpgradeEffectsSelector>().SelectMoneyPerFollowerIncrease();
+                        var currentFaithPerClickModifier = this.ServiceProvider.GetRequiredService<UpgradeEffectsSelector>().SelectFaithPerClickIncrease();
                         if(effect.FaithPerClickIncrease != 0)
                             Assert.NotEqual(initialFaithPerClickModifier, currentFaithPerClickModifier);
                         Assert.Equal(initialFaithPerClickModifier + effect.FaithPerClickIncrease, currentFaithPerClickModifier);
@@ -94,7 +94,7 @@ namespace DeusVultClicker.Client.Test
 
         public static IEnumerable<object[]> GetUnlockUpgradeData()
         {
-            yield return new object[] { new UpgradeTestData("beg", new AppState(1000, 12, 0, DateTime.MaxValue, 50)) };
+            yield return new object[] { new UpgradeTestData("faith-per-click-1", new AppState(1000, 12, 0, DateTime.MaxValue, 50)) };
         }
 
         public struct UpgradeTestData

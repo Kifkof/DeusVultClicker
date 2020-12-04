@@ -4,7 +4,7 @@ using DeusVultClicker.Client.Eras.Store.Selectors;
 using DeusVultClicker.Client.Shared;
 using DeusVultClicker.Client.Shared.Store.Effects;
 using DeusVultClicker.Client.Shared.Store.Selectors;
-using DeusVultClicker.Client.Upgrades.Store.Selector;
+using DeusVultClicker.Client.Upgrades.Store.Selectors;
 using Fluxor;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +22,7 @@ namespace DeusVultClicker.Client.DependecyInjection
             serviceCollection.AddScoped<DisplayOptionsSelector>();
             serviceCollection.AddScoped<AvailableEraSelector>();
             serviceCollection.AddScoped<UpgradeEffectsSelector>();
+            serviceCollection.AddScoped<ReachSelector>();
             serviceCollection.AddScoped<TryAddFollowerActionEffect>();
             serviceCollection.AddScoped<TimerService>();
 

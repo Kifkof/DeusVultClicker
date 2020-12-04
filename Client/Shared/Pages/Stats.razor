@@ -1,11 +1,12 @@
 ﻿@using DeusVultClicker.Client.Shared.Store.Selectors
+
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 <article id="stats-wrapper">
-    @if (false)
+    @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.FollowerOverReachStat))
     {
         <section class="stat-card" id="stat-card-follower-over-reach">
             <span class="stat-card-title">Followers / Reach</span>
-            <span class="stat-card-content">@AppState.Value.Followers/@BuildingState.Value.Reach</span>
+            <span class="stat-card-content">@AppState.Value.Followers/@ReachSelector.SelectReach()</span>
         </section>
     }
     @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.FaithStat))
@@ -68,4 +69,6 @@
     private IState<EraState> EraState { get; set; }
     [Inject]
     private DisplayOptionsSelector DisplayOptionsSelector { get; set; }
+    [Inject]
+    private ReachSelector ReachSelector { get; set; }
 }

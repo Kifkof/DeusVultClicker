@@ -92,6 +92,20 @@ namespace DeusVultClicker.Client.Upgrades
                     Effects = new[] { new FaithPerClickUpgradeEffect(5) }
                 }
             },
+             {
+                "follower-introduction",
+                new Upgrade
+                {
+                    Id = "follower-introduction",
+                    Title = "Followers",
+                    Description = "People who follow you.",
+                    EffectDescription = "",
+                    FlavorText = "...",
+                    Cost = 500,
+                    Prerequisites = new[] { "jesus-era", "faith-per-click-1", "faith-per-click-3", "faith-per-click-5" },
+                    Effects = new[] { new  BaseReachUpgradeEffect(12) }
+                }
+            },
         };
     }
 }

@@ -19,7 +19,6 @@ namespace DeusVultClicker.Client.Test
             var initialBuildingState = this.ServiceProvider.GetRequiredService<IState<BuildingState>>();
 
             Assert.Empty(initialBuildingState.Value.OwnedBuildings);
-            Assert.Equal(0, initialBuildingState.Value.Reach);
         }
 
         [Theory]
@@ -46,7 +45,6 @@ namespace DeusVultClicker.Client.Test
             var currentBuildingState = this.ServiceProvider.GetRequiredService<IState<BuildingState>>().Value;
             var addedBuilding = Assert.Single(currentBuildingState.OwnedBuildings.Except(initialBuildingState.OwnedBuildings));
             Assert.Same(building, addedBuilding);
-            Assert.Equal(initialBuildingState.Reach + building.Reach, currentBuildingState.Reach);
         }
 
         [Fact]
@@ -64,9 +62,8 @@ namespace DeusVultClicker.Client.Test
 
             //Assert
             dispatcher.Dispatch(new DemolishBuildingAction(building));
-            var (ownedBuildings, reach) = this.ServiceProvider.GetRequiredService<IState<BuildingState>>().Value;
-            Assert.DoesNotContain(building, ownedBuildings);
-            Assert.Equal(initialBuildingState.Reach, reach);
+            var buildingStateAfterDemolish = this.ServiceProvider.GetRequiredService<IState<BuildingState>>().Value;
+            Assert.DoesNotContain(building, buildingStateAfterDemolish.OwnedBuildings);
         }
 
         public static IEnumerable<object[]> GetBuyBuildingData()

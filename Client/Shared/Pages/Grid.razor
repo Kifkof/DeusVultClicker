@@ -1,4 +1,4 @@
-﻿@using DeusVultClicker.Client.Upgrades.Store.Selector
+﻿@using DeusVultClicker.Client.Upgrades.Store.Selectors
 @using DeusVultClicker.Client.Buildings.Pages
 @using DeusVultClicker.Client.Upgrades.Pages
 @using DeusVultClicker.Client.Eras.Store.Selectors
@@ -37,7 +37,7 @@
             }
             @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.SecondaryAbility))
             {
-                <button disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)"
+                <button disabled="@(AppState.Value.Followers >= ReachSelector.SelectReach())"
                         @onclick="() => Dispatcher.Dispatch(new TryAddFollowersAction(UpgradeEffectsSelector.SelectFollowerPerClickIncrease()))">
                     Proselytize
                 </button>
@@ -76,7 +76,7 @@
     private AvailableEraSelector AvailableEraSelector { get; set; }
     private EraAdvancement EraAdvancement => AvailableEraSelector.SelectAvailableEra();
     [Inject]
-    private IState<BuildingState> BuildingState { get; set; }
+    private ReachSelector ReachSelector { get; set; }
     [Inject]
     private IState<EraState> EraState { get; set; }
     [Inject]

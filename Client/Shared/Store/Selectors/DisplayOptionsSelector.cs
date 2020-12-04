@@ -27,6 +27,7 @@ namespace DeusVultClicker.Client.Shared.Store.Selectors
                 => previousOptions | advancements switch
                 {
                     "jesus-era" => DisplayOptions.Grid | DisplayOptions.PrimaryAbility | DisplayOptions.FaithStat | DisplayOptions.Upgrades,
+                    "follower-introduction" => DisplayOptions.FollowerOverReachStat,
                     _ => DisplayOptions.None,
                 });
         }

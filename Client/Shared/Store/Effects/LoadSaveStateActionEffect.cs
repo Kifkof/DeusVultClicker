@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DeusVultClicker.Client.Upgrades.Store.Selector;
+using DeusVultClicker.Client.Upgrades.Store.Selectors;
 
 namespace DeusVultClicker.Client.Shared.Store.Effects
 {

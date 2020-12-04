@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DeusVultClicker.Client.Upgrades.UpgradeEffects;
 
-namespace DeusVultClicker.Client.Upgrades.Store.Selector
+namespace DeusVultClicker.Client.Upgrades.Store.Selectors
 {
     public class UpgradeEffectsSelectorHelper
     {
@@ -38,7 +38,12 @@ namespace DeusVultClicker.Client.Upgrades.Store.Selector
                  .OfType<FollowerPerClickUpgradeEffect>()
                  .Sum(e => e.FollowerPerClickIncrease);
         }
-
+        public static int SelectBaseReachIncrease(IEnumerable<string> purchasedUpgradeIds)
+        {
+            return AllEffects(purchasedUpgradeIds)
+                 .OfType<BaseReachUpgradeEffect>()
+                 .Sum(e => e.BaseReachIncrease);
+        }
         private static IEnumerable<IUpgradeEffect> AllEffects(IEnumerable<string> purchasedUpgradeIds)
         {
             return UpgradeStorage.Upgrades
