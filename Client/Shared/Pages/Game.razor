@@ -1,0 +1,17 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+@using Eras;
+
+@switch (EraState.Value.Era.Id)
+{
+    case "start-era":
+        <StartScreen />
+        break;
+    case "jesus-era":
+        <Grid />
+        break;
+}
+
+@code {
+    [Inject]
+    private IState<EraState> EraState { get; set; }
+}
