@@ -22,8 +22,8 @@ namespace DeusVultClicker.Client.Eras
             Description = "Please GOD send me a savior.",
             EffectDescription = "Sends the Messiah to earth.",
             FlavorText = "Jesus Christ it's Jesus Christ.",
-            Cost = 50,
-            AvailableSpace = 1
+            Cost = 0,
+            AvailableSpace = 0
         };
 
         public static readonly Dictionary<string, EraAdvancement> EraAdvancements = new Dictionary<string, EraAdvancement>

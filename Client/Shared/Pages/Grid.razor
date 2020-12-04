@@ -2,9 +2,9 @@
 @using DeusVultClicker.Client.Buildings.Pages
 @using DeusVultClicker.Client.Upgrades.Pages
 @using DeusVultClicker.Client.Eras.Store.Selectors
-@using DeusVultClicker.Client.Eras
-
+@using Eras
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
 <article>
     <header>
         <hgroup>
@@ -25,21 +25,50 @@
             }
         </section>
     </header>
-    <div id="ability-container">
-        <button @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">
-            Pray
-        </button>
-        <button disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)"
-                @onclick="() => Dispatcher.Dispatch(new TryAddFollowersAction(UpgradeEffectsSelector.SelectFollowerPerClickIncrease()))">
-            Proselytize
-        </button>
-    </div>
-    <div id="stats-container">
-        <Stats />
-    </div>
-    <div id="owned-buildings-container"><OwnedBuildings /></div>
-    <div id="available-buildings-container"><AvailableBuildings /></div>
-    <div id="faith-upgrades-container"><AvailableUpgrades /></div>
+    @if (true)
+    {
+        <section id="ability-container">
+            @if (AbilitiesToDisplay.HasFlag(AbilitiesFlag.Primary))
+            {
+                <button @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">
+                    Pray
+                </button>
+            }
+            @if (AbilitiesToDisplay.HasFlag(AbilitiesFlag.Secondary))
+            {
+                <button disabled="@(AppState.Value.Followers >= BuildingState.Value.Reach)"
+                        @onclick="() => Dispatcher.Dispatch(new TryAddFollowersAction(UpgradeEffectsSelector.SelectFollowerPerClickIncrease()))">
+                    Proselytize
+                </button>
+            }
+        </section>
+    }
+    @if (true)
+    {
+        <section id="stats-container">
+            <Stats StatsToDisplay="@StatsToDisplay" />
+        </section>
+    }
+    @if (false)
+    {
+        <section id="owned-buildings-container">
+
+            <OwnedBuildings />
+        </section>
+    }
+    @if (false)
+    {
+        <section id="available-buildings-container">
+            <AvailableBuildings />
+        </section>
+    }
+    @if (false)
+    {
+        <section id="faith-upgrades-container">
+            <AvailableUpgrades />
+
+        </section>
+    }
 </article>
 @code {
     [Inject]
@@ -55,4 +84,18 @@
     private UpgradeEffectsSelector UpgradeEffectsSelector { get; set; }
     [Inject]
     private IDispatcher Dispatcher { get; set; }
+
+    [Parameter]
+    public AbilitiesFlag AbilitiesToDisplay { get; set; }
+
+    [Parameter]
+    public Stats.StatsFlag StatsToDisplay { get; set; }
+
+    [Flags]
+    public enum AbilitiesFlag
+    {
+        None,
+        Primary,
+        Secondary
+    }
 }
