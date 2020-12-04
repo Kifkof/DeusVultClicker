@@ -51,19 +51,47 @@ namespace DeusVultClicker.Client.Upgrades
                 }
             },
             {
-                "beg",
+                "faith-per-click-1",
                 new Upgrade
                 {
-                    Id = "beg",
-                    Title = "Beg",
-                    Description = "Send your followers to beg for money.",
-                    EffectDescription = "Follower cps + 0.1",
-                    FlavorText = "Beg for merc.....money",
-                    Cost = 250,
-                    Prerequisites = new[] { "post-religion-era" },
-                    Effects = new[] { new MoneyPerFollowerUpgradeEffect(0.1) }
+                    Id = "faith-per-click-1",
+                    Title = "Click strength",
+                    Description = "Better prayers",
+                    EffectDescription = "faith per click +1",
+                    FlavorText = "...",
+                    Cost = 20,
+                    Prerequisites = new[] { "jesus-era" },
+                    Effects = new[] { new FaithPerClickUpgradeEffect(1) }
                 }
-            }
+            },
+            {
+                "faith-per-click-3",
+                new Upgrade
+                {
+                    Id = "faith-per-click-3",
+                    Title = "Click strength",
+                    Description = "Better prayers",
+                    EffectDescription = "faith per click +3",
+                    FlavorText = "...",
+                    Cost = 100,
+                    Prerequisites = new[] { "jesus-era","faith-per-click-1" },
+                    Effects = new[] { new FaithPerClickUpgradeEffect(3) }
+                }
+            },
+            {
+                "faith-per-click-5",
+                new Upgrade
+                {
+                    Id = "faith-per-click-5",
+                    Title = "Click strength",
+                    Description = "Better prayers",
+                    EffectDescription = "faith per click +5",
+                    FlavorText = "...",
+                    Cost = 450,
+                    Prerequisites = new[] { "jesus-era", "faith-per-click-1", "faith-per-click-3" },
+                    Effects = new[] { new FaithPerClickUpgradeEffect(5) }
+                }
+            },
         };
     }
 }
