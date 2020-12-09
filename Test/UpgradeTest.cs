@@ -94,7 +94,7 @@ namespace DeusVultClicker.Client.Test
 
         public static IEnumerable<object[]> GetUnlockUpgradeData()
         {
-            yield return new object[] { new UpgradeTestData("faith-per-click-1", new AppState(1000, 12, 0, DateTime.MaxValue, 50)) };
+            yield return new object[] { new UpgradeTestData("ftpc:baptize", new AppState(1000, 0, 0, DateTime.MaxValue, 50)) };
         }
 
         public struct UpgradeTestData
