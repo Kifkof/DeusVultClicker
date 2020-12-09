@@ -1,0 +1,9 @@
+﻿@using Eras;
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+<button @onclick="() => Dispatcher.Dispatch(new AdvanceToEraAction(EraStorage.JesusEra))">Invent Jesus</button>
+
+@code {
+    [Inject]
+    private IDispatcher Dispatcher { get; set; }
+}

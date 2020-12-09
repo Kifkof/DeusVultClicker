@@ -1,21 +1,13 @@
-﻿#grid-wrapper {
+﻿article {
     display: grid;
     height: 100%;
     width: 100%;
-    grid-template: "title era era" 12% "ability owned-buildings available-buildings" 30% "stats owned-buildings faith-upgrades" auto / calc((100% - 10px)/8*2) calc((100% - 10px)/8*3) calc((100% - 10px)/8*3);
+    grid-template: "header header header" 12% "ability owned-buildings available-buildings" 30% "stats owned-buildings faith-upgrades" auto / calc((100% - 10px)/8*2) calc((100% - 10px)/8*3) calc((100% - 10px)/8*3);
     gap: 5px;
 }
 
-#title {
-    grid-area: title;
-}
-
-    #title h1 {
-        font-size: 2.5em;
-    }
-
-#era-container {
-    grid-area: era;
+header {
+    grid-area: header;
     display: flex;
     justify-content: space-between;
     align-items: center;

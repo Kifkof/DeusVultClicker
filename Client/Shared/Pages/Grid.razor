@@ -1,0 +1,90 @@
+﻿@using DeusVultClicker.Client.Upgrades.Store.Selectors
+@using DeusVultClicker.Client.Buildings.Pages
+@using DeusVultClicker.Client.Upgrades.Pages
+@using DeusVultClicker.Client.Eras.Store.Selectors
+@using DeusVultClicker.Client.Shared.Store.Selectors
+@using Eras
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+<article>
+    <header>
+        <hgroup>
+            <h1>Deus Vult Clicker</h1>
+            <h2>@EraState.Value.Era.Title</h2>
+        </hgroup>
+        <section>
+            @if (EraAdvancement != null)
+            {
+                <AdvancementCard Title="@EraAdvancement.Title"
+                                 Cost="@($"{EraAdvancement.Cost} Faith")"
+                                 Description="@EraAdvancement.Description"
+                                 EffectDescription="@EraAdvancement.EffectDescription"
+                                 FlavorText="@EraAdvancement.FlavorText"
+                                 BuyText="Advance"
+                                 Disabled="@(EraAdvancement.Cost > AppState.Value.Faith)"
+                                 OnBuy="() => Dispatcher.Dispatch(new AdvanceToEraAction(EraAdvancement))" />
+            }
+        </section>
+    </header>
+    @if (true)
+    {
+        <section id="ability-container">
+            @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.PrimaryAbility))
+            {
+                <button @onclick="() => Dispatcher.Dispatch(new AddFaithAction(UpgradeEffectsSelector.SelectFaithPerClickIncrease()))">
+                    Pray
+                </button>
+            }
+            @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.SecondaryAbility))
+            {
+                <button disabled="@(AppState.Value.Followers >= ReachSelector.SelectReach())"
+                        @onclick="() => Dispatcher.Dispatch(new TryAddFollowersAction(UpgradeEffectsSelector.SelectFollowerPerClickIncrease()))">
+                    Proselytize
+                </button>
+            }
+        </section>
+    }
+    @if (true)
+    {
+        <section id="stats-container">
+            <Stats />
+        </section>
+    }
+    @if (false)
+    {
+        <section id="owned-buildings-container">
+
+            <OwnedBuildings />
+        </section>
+    }
+    @if (false)
+    {
+        <section id="available-buildings-container">
+            <AvailableBuildings />
+        </section>
+    }
+    @if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.Upgrades))
+    {
+        <section id="faith-upgrades-container">
+            <AvailableUpgrades />
+
+        </section>
+    }
+</article>
+@code {
+    [Inject]
+    private AvailableEraSelector AvailableEraSelector { get; set; }
+    private EraAdvancement EraAdvancement => AvailableEraSelector.SelectAvailableEra();
+    [Inject]
+    private ReachSelector ReachSelector { get; set; }
+    [Inject]
+    private IState<EraState> EraState { get; set; }
+    [Inject]
+    private IState<AppState> AppState { get; set; }
+    [Inject]
+    private UpgradeEffectsSelector UpgradeEffectsSelector { get; set; }
+    [Inject]
+    private DisplayOptionsSelector DisplayOptionsSelector { get; set; }
+    [Inject]
+    private IDispatcher Dispatcher { get; set; }
+}

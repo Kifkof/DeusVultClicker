@@ -13,7 +13,6 @@ namespace DeusVultClicker.Client.Buildings.Store
             return state with
             {
                 OwnedBuildings = state.OwnedBuildings.Concat(new[] { building }),
-                Reach = state.Reach + building.Reach,
             };
         }
 
@@ -24,7 +23,6 @@ namespace DeusVultClicker.Client.Buildings.Store
             return state with
             {
                 OwnedBuildings = state.OwnedBuildings.Where(b => b.Id != building.Id),
-                Reach = state.Reach - building.Reach,
             };
         }
 

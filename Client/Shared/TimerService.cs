@@ -2,7 +2,7 @@
 using DeusVultClicker.Client.Shared.Store.Actions;
 using Fluxor;
 using System.Timers;
-using DeusVultClicker.Client.Upgrades.Store.Selector;
+using DeusVultClicker.Client.Upgrades.Store.Selectors;
 
 namespace DeusVultClicker.Client.Shared
 {

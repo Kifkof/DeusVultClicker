@@ -1,6 +1,6 @@
 ﻿using Fluxor;
 
-namespace DeusVultClicker.Client.Upgrades.Store.Selector
+namespace DeusVultClicker.Client.Upgrades.Store.Selectors
 {
     public class UpgradeEffectsSelector
     {
@@ -30,6 +30,10 @@ namespace DeusVultClicker.Client.Upgrades.Store.Selector
         public int SelectFollowerPerClickIncrease()
         {
             return UpgradeEffectsSelectorHelper.SelectFollowerPerClickIncrease(this.upgradeState.Value.PurchasedUpgradeIds);
+        }
+        public int SelectBaseReachIncrease()
+        {
+            return UpgradeEffectsSelectorHelper.SelectBaseReachIncrease(this.upgradeState.Value.PurchasedUpgradeIds);
         }
     }
 }

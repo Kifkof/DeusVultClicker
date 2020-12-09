@@ -2,7 +2,7 @@
 using System.Linq;
 using DeusVultClicker.Client.Shared.Store.Selectors;
 
-namespace DeusVultClicker.Client.Upgrades.Store.Selector
+namespace DeusVultClicker.Client.Upgrades.Store.Selectors
 {
     public class AvailableUpgradesSelector
     {

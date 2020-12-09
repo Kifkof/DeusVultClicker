@@ -1,0 +1,19 @@
+﻿@using Shared.Store.Selectors;
+@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+@if (DisplayOptionsSelector.IsDisplayed(DisplayOptionsSelector.DisplayOptions.Grid))
+{
+    <Grid />
+}
+else
+{
+    <StartScreen />
+}
+
+@code {
+    [Inject]
+    private DisplayOptionsSelector DisplayOptionsSelector { get; set; }
+    
+    [Inject]
+    private IState<AppState> appState { get; set; } // needed for Fluxor change handling
+}

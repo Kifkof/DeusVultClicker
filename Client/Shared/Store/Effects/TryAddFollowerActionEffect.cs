@@ -1,6 +1,6 @@
-﻿using DeusVultClicker.Client.Buildings.Store;
-using DeusVultClicker.Client.Shared.Store.Actions;
-using DeusVultClicker.Client.Upgrades.Store.Selector;
+﻿using DeusVultClicker.Client.Shared.Store.Actions;
+using DeusVultClicker.Client.Shared.Store.Selectors;
+using DeusVultClicker.Client.Upgrades.Store.Selectors;
 using Fluxor;
 using System;
 using System.Linq;
@@ -12,25 +12,28 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
     public class TryAddFollowerActionEffect : Effect<TryAddFollowersAction>
     {
         private readonly IState<AppState> appState;
-        private readonly IState<BuildingState> buildingState;
         private readonly UpgradeEffectsSelector upgradeEffectsSelector;
+        private readonly ReachSelector reachSelector;
 
-        public TryAddFollowerActionEffect(IState<AppState> appState, IState<BuildingState> buildingState, UpgradeEffectsSelector upgradeEffectsSelector)
+        public TryAddFollowerActionEffect(IState<AppState> appState, UpgradeEffectsSelector upgradeEffectsSelector, ReachSelector reachSelector)
         {
             this.appState = appState;
-            this.buildingState = buildingState;
             this.upgradeEffectsSelector = upgradeEffectsSelector;
+            this.reachSelector = reachSelector;
         }
 
         [EffectMethod]
         protected override Task HandleAsync(TryAddFollowersAction action, IDispatcher dispatcher)
         {
-            dispatcher.Dispatch(new AddFollowersAction(GetNumberOfAcquiredFollowers(action.Amount, 0.2)));
+            dispatcher.Dispatch(new AddFollowersAction(GetNumberOfAcquiredFollowers(action.Amount, 0.01)));
             return Task.CompletedTask;
         }
 
         private int GetNumberOfAcquiredFollowers(int amount, double baseAcquisitionFavorability)
         {
+            if (appState.Value.Followers + amount <= 12) // first 12 Followers 100% chance
+                return amount;
+
             var newTotalFollowers = Enumerable.Range(0, amount)
                 .Aggregate(appState.Value.Followers,
                     (currentFollowers, _) =>
@@ -44,7 +47,7 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
         {
             var diceRoll = new Random().NextDouble();
             var chance = CalculateFollowerAcquisitionChance(
-                                currentFollowers / buildingState.Value.Reach,
+                                currentFollowers / reachSelector.SelectReach(),
                                 baseAcquisitionFavorability + upgradeEffectsSelector.SelectAcquisitionFavorabilityIncrease());
             return diceRoll < chance;
         }
