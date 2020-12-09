@@ -1,5 +1,4 @@
-﻿using DeusVultClicker.Client.Buildings.Store;
-using DeusVultClicker.Client.Shared.Store.Actions;
+﻿using DeusVultClicker.Client.Shared.Store.Actions;
 using DeusVultClicker.Client.Shared.Store.Selectors;
 using DeusVultClicker.Client.Upgrades.Store.Selectors;
 using Fluxor;
@@ -26,16 +25,14 @@ namespace DeusVultClicker.Client.Shared.Store.Effects
         [EffectMethod]
         protected override Task HandleAsync(TryAddFollowersAction action, IDispatcher dispatcher)
         {
-            dispatcher.Dispatch(new AddFollowersAction(GetNumberOfAcquiredFollowers(action.Amount, 0.2)));
+            dispatcher.Dispatch(new AddFollowersAction(GetNumberOfAcquiredFollowers(action.Amount, 0.01)));
             return Task.CompletedTask;
         }
 
         private int GetNumberOfAcquiredFollowers(int amount, double baseAcquisitionFavorability)
         {
             if (appState.Value.Followers + amount <= 12) // first 12 Followers 100% chance
-            {
                 return amount;
-            }
 
             var newTotalFollowers = Enumerable.Range(0, amount)
                 .Aggregate(appState.Value.Followers,

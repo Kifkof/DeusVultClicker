@@ -1,6 +1,4 @@
-﻿using Fluxor;
-using DeusVultClicker.Client.Eras.Store;
-using System;
+﻿using System;
 using System.Linq;
 
 namespace DeusVultClicker.Client.Shared.Store.Selectors
@@ -28,7 +26,7 @@ namespace DeusVultClicker.Client.Shared.Store.Selectors
                 {
                     "jesus-era" => DisplayOptions.Grid | DisplayOptions.PrimaryAbility | DisplayOptions.FaithStat | DisplayOptions.Upgrades,
                     "follower-introduction" => DisplayOptions.FollowerOverReachStat,
-                    "proclame-ability" => DisplayOptions.SecondaryAbility,
+                    "fwpc:proclaim" => DisplayOptions.SecondaryAbility,
                     _ => DisplayOptions.None,
                 });
         }
